@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+run.ps1
+LocalPostgres.session.sql
+backend/src/main/resources/db.properties
