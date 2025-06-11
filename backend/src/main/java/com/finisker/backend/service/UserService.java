@@ -1,7 +1,10 @@
-package com.finisker.backend.user;
+package com.finisker.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.finisker.backend.persistence.entity.User;
+import com.finisker.backend.persistence.respository.UserRepository;
 
 import java.util.List;
 
