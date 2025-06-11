@@ -18,7 +18,7 @@ public class EnemyService {
         this.enemyRepository = enemyRepository;
     }
 
-    public List<Enemy> getEnemys() {
+    public List<Enemy> getEnemies() {
         return enemyRepository.findAll();
     }
 
