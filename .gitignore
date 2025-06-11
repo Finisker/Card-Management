@@ -34,3 +34,4 @@ build/
 run.ps1
 LocalPostgres.session.sql
 backend/src/main/resources/private.properties
+db-structure
