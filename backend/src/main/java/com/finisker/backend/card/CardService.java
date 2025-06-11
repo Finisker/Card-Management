@@ -11,8 +11,8 @@ public class CardService {
     private final CardRepository cardRepository;
 
     @Autowired
-    public CardService(CardRepository userRepository) {
-        this.cardRepository = userRepository;
+    public CardService(CardRepository cardRepository) {
+        this.cardRepository = cardRepository;
     }
 
     public List<Card> getCards() {
