@@ -9,14 +9,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "enemies")
+public class Enemy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String password;
-    private String role;
+    private String title;
+    private String image_path;
+    private String description;
+    private String bite_effect;
+
+    private Integer attack_damage;
+    private Integer health_points;
+    private Integer stun_points;
 }
