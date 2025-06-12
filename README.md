@@ -1,5 +1,5 @@
 # Card-Management
-Project implementing the backend and frontend of a web application.
+Project implementing the backend and (in the future)frontend of a web application.
 
 ## Tech stack
 ### Database:
