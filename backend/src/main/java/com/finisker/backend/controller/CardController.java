@@ -3,6 +3,7 @@ package com.finisker.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.finisker.backend.model.dto.CardDTO;
 import com.finisker.backend.persistence.entity.Card;
 import com.finisker.backend.service.CardService;
 
@@ -26,8 +28,9 @@ public class CardController {
     }
 
     @GetMapping("/all")
-    public List<Card> getCards() {
-        return cardService.getCards();
+    public ResponseEntity<List<CardDTO>> getAllCards() {
+        List<CardDTO> dtos = cardService.getAllCards();
+        return ResponseEntity.ok(dtos);
     }
 
     @PostMapping("/add")

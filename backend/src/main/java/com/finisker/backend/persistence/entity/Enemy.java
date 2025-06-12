@@ -1,5 +1,6 @@
 package com.finisker.backend.persistence.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,13 +16,19 @@ public class Enemy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "title")
     private String title;
-    private String image_path;
+    @Column(name = "image_path")
+    private String imagePath;
+    @Column(name = "description")
     private String description;
-    private String bite_effect;
+    @Column(name = "bite_effect")
+    private String biteEffect;
 
-    private Integer attack_damage;
-    private Integer health_points;
-    private Integer stun_points;
+    @Column(name = "attack_damage")
+    private Integer attackDamage;
+    @Column(name = "health_points")
+    private Integer healthPoints;
+    @Column(name = "stun_points")
+    private Integer stunPoints;
 }
