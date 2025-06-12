@@ -34,9 +34,4 @@ public class EnemyController {
     public void createEnemy(@RequestBody Enemy enemy) {
         enemyService.addEnemy(enemy);
     }
-
-    @DeleteMapping("/deleteAll")
-    public void deleteEnemies() {
-        enemyService.deleteAll();
-    }
 }

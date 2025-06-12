@@ -37,9 +37,4 @@ public class TagController {
     public void createTag(@RequestBody Tag tag) {
         tagService.addTag(tag);
     }
-
-    @DeleteMapping("/deleteAll")
-    public void deleteTags() {
-        tagService.deleteAll();
-    }
 }
