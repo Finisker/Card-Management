@@ -39,7 +39,8 @@ public class CardService {
 
         Set<Tag> existingTags = dto.getTags().stream()
                 .map(tagDTO -> tagRepository.findById(tagDTO.getId())
-                        .orElseThrow(() -> new RuntimeException("Tag not found: " + tagDTO.getId())))
+                        .orElseThrow(() -> new RuntimeException(
+                                "Tag not found: " + tagDTO.getId())))
                 .collect(Collectors.toSet());
 
         card.setTags(existingTags);
