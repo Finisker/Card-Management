@@ -1,7 +1,6 @@
-.container {
+.chip-container {
   display: inline-flex;
   gap: 6px;
-  align-items: center;
   justify-content: center;
   border-radius: 8px;
   border: 1px solid;
