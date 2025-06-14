@@ -10,29 +10,30 @@ export default function CardForm(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch("http://localhost:8080/cards/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Response error");
-          return;
-        }
+    // fetch("http://localhost:8080/cards/add", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) {
+    //       console.log("Response error");
+    //       return;
+    //     }
 
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Card added", data);
-        props.addCard(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log("Card added", data);
+    //     props.addCard(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
+    props.addCard(formData);
     setFormData(emptyFormData);
   }
 
