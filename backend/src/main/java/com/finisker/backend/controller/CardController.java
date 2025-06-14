@@ -19,7 +19,7 @@ import com.finisker.backend.service.CardService;
 
 @RestController
 @RequestMapping(path = "cards")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CardController {
     private final CardService cardService;
     private final CardMapper cardMapper;
