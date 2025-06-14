@@ -1,0 +1,15 @@
+.container {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.26s ease-out;
+  background: #fff;
+  border-color: #e4e5eb;
+  color: #676b8d;
+  font-weight: 500;
+  width: auto;
+}
