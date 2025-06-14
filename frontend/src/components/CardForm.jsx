@@ -1,21 +1,66 @@
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { useState } from "react";
 
-export default function CardForm() {
+export default function CardForm(props) {
+  const [formData, setFormData] = useState({ title: "", description: "" });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    fetch("http://localhost:8080/cards/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          console.log("Response error");
+          return;
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Card added", data);
+        props.addCard(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
   return (
-    <Form>
+    <Form onSubmit={(e) => handleSubmit(e)}>
       <Form.Group className="mb-3" controlId="cardForm.ControlInput1">
-        <Form.Label>Card name</Form.Label>
-        <Form.Control type="name" placeholder="Strike" />
+        <Form.Label>Card title</Form.Label>
+        <Form.Control
+          name="title"
+          placeholder="Strike"
+          onChange={(e) => handleChange(e)}
+          value={formData.title}
+        />
       </Form.Group>
       <Form.Group className="mb-3" controlId="cardForm.ControlTextarea1">
         <Form.Label>Descrition</Form.Label>
         <Form.Control
-          type="description"
+          name="description"
           as="textarea"
           rows={3}
           placeholder="Me Kronk! I hit hard!"
+          onChange={(e) => handleChange(e)}
+          value={formData.description}
         />
       </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
     </Form>
   );
 }

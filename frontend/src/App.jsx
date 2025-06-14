@@ -17,17 +17,20 @@ export default function App() {
       })
       .then((data) => {
         setCards(data);
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  console.log(cards);
+  function addCard(card) {
+    setCards((prev) => [...prev, card]);
+  }
 
   return (
     <>
-      <CardForm></CardForm>
+      <CardForm addCard={addCard}></CardForm>
       {cards &&
         cards.map((card, index) => {
           return <CardDetails key={index} data={card}></CardDetails>;
