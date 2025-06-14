@@ -2,8 +2,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
+const emptyFormData = { title: "", description: "" };
+
 export default function CardForm(props) {
-  const [formData, setFormData] = useState({ title: "", description: "" });
+  const [formData, setFormData] = useState(emptyFormData);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -30,6 +32,8 @@ export default function CardForm(props) {
       .catch((error) => {
         console.log(error);
       });
+
+    setFormData(emptyFormData);
   }
 
   function handleChange(e) {
