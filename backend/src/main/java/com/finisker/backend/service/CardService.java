@@ -36,14 +36,15 @@ public class CardService {
 
     public Card createCard(CardDTO dto) {
         Card card = cardMapper.toEntity(dto);
+        if (dto.getTags() != null) {
+            Set<Tag> existingTags = dto.getTags().stream()
+                    .map(tagDTO -> tagRepository.findById(tagDTO.getId())
+                            .orElseThrow(() -> new RuntimeException(
+                                    "Tag not found: " + tagDTO.getId())))
+                    .collect(Collectors.toSet());
 
-        Set<Tag> existingTags = dto.getTags().stream()
-                .map(tagDTO -> tagRepository.findById(tagDTO.getId())
-                        .orElseThrow(() -> new RuntimeException(
-                                "Tag not found: " + tagDTO.getId())))
-                .collect(Collectors.toSet());
-
-        card.setTags(existingTags);
+            card.setTags(existingTags);
+        }
 
         return cardRepository.save(card);
     }
