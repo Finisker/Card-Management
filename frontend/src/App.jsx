@@ -1,50 +1,31 @@
 import { useEffect, useState } from "react";
 import CardDetails from "./components/CardDetails";
-import CardForm from "./components/CardForm";
-import "./App.css";
 import Chip from "./components/Chip";
 import SearchBar from "./components/SearchBar";
+import CardsDisplay from "./components/CardsDisplay";
+import CreationModal from "./components/CreationModal";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/esm/Container";
+import "./styles/App.css";
 
 export default function App() {
-  const [cards, setCards] = useState(null);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/cards/all")
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         console.log("Response error");
-  //         return;
-  //       }
-
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setCards(data);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  function addCard(card) {
-    if (!cards) {
-      setCards([]);
-    }
-
-    setCards((prev) => [...prev, card]);
-  }
+  const [showCardModal, setShowCardModal] = useState(false);
 
   return (
-    <>
-      <SearchBar />
-      <CardForm addCard={addCard}></CardForm>
-      <div className="cards">
-        {cards &&
-          cards.map((card, index) => {
-            return <CardDetails key={index} data={card}></CardDetails>;
-          })}
-      </div>
-    </>
+    // <div className="app-container container-fluid d-flex flex-column justify-content-center h-100">
+    //   <SearchBar />
+    //   <CardsDisplay>
+    //     {/* <Button variant="primary" onClick={() => setShowCardModal(true)}>
+    //       Launch demo modal
+    //     </Button> */}
+    //   </CardsDisplay>
+    //   <CreationModal
+    //     show={showCardModal}
+    //     onHide={() => setShowCardModal(false)}
+    //   />
+    // </div>
+    <div className="move">
+      <CardDetails></CardDetails>
+    </div>
   );
 }

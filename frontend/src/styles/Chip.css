@@ -1,13 +1,9 @@
-.chip-container {
-  display: inline-flex;
-  gap: 6px;
-  justify-content: center;
+.chip {
   border-radius: 8px;
   border: 1px solid;
   cursor: pointer;
-  transition: all 0.26s ease-out;
-  background: #fff;
-  border-color: #e4e5eb;
+  background: #d4e9fe;
+  border-color: #00a3e4;
   color: #676b8d;
   font-weight: 500;
   width: auto;

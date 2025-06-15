@@ -5,11 +5,8 @@ export default function Chip(props) {
   const children = Children.toArray(props.children);
 
   return (
-    <div
-      className="container chip-container mb-3"
-      onClick={props.handleOnClick}
-    >
-      <span>{children}</span>
+    <div className="chip ps-2 pe-2" onClick={props.handleOnClick}>
+      {children}
     </div>
   );
 }
