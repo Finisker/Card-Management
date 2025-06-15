@@ -1,10 +1,17 @@
 .app-container {
-  position: relative;
-  top: -100px;
+  background-image: url(/background2.jpg);
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.move {
+.searchbar-container {
   position: relative;
-  top: 100px;
-  left: 100px;
+  top: 10%;
+}
+
+.cardsdisplay-container {
+  position: relative;
+  top: 5%;
 }

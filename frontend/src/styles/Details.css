@@ -9,6 +9,7 @@
   align-items: center;
 
   position: relative;
+  background-color: inherit;
 }
 
 .card-title {
@@ -36,12 +37,12 @@
 }
 
 .manaCost {
-  left: 1%;
+  left: 2%;
   background-color: rgb(0, 0, 255, 0.5);
 }
 
 .goldCost {
-  right: 1%;
+  right: 2%;
   background-color: rgba(255, 255, 0, 0.4);
 }
 
@@ -51,8 +52,6 @@
 
   height: 100%;
   width: 65%;
-
-  border: 1px solid;
 
   justify-content: center;
   align-items: center;
@@ -93,4 +92,35 @@
   width: 100%;
   height: 20%;
   margin-bottom: 2px;
+}
+
+.card-title-tag {
+  display: flex;
+  height: 30%;
+
+  position: relative;
+  width: 100%;
+  top: 1%;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+  font-size: 100%;
+
+  background-color: inherit;
+}
+
+.tag-art {
+  position: relative;
+  height: 75%;
+  width: 25%;
+}
+
+.left-art {
+  left: 3%;
+}
+
+.right-art {
+  right: 3%;
 }

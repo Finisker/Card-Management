@@ -1,30 +1,8 @@
 import Card from "react-bootstrap/Card";
-import "../styles/CardDetails.css";
+import "../styles/Details.css";
 import Container from "react-bootstrap/esm/Container";
 
-const testCard = {
-  title: "Strike",
-  type: "postman_type",
-  description:
-    "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-  imagePath: "postman_image_path",
-
-  manaCost: 2,
-  goldCost: 1,
-
-  tags: [
-    {
-      id: 1,
-    },
-  ],
-};
-
-export default function CardDetails() {
-  const props = {
-    size: 18,
-    data: testCard,
-  };
-
+export default function CardDetails(props) {
   const size = {
     width: props.size,
     height: props.size * 1.5,
@@ -43,6 +21,7 @@ export default function CardDetails() {
         width: size.width + "rem",
         height: size.height + "rem",
         fontSize: size.fontSize + "rem",
+        backgroundColor: "inherit",
       }}
     >
       <Card.Body className="card-body">
@@ -58,7 +37,7 @@ export default function CardDetails() {
           </span>
           <span className="cost goldCost">{props.data.goldCost}</span>
         </Card.Title>
-        <Card.Img className="image" src="strike.jpg" />
+        <Card.Img className="image" src={props.data.imagePath} />
         <Card.Text
           className="description"
           style={{

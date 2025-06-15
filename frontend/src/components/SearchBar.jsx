@@ -13,6 +13,7 @@ const testTags = [
   "Tag412323443534535345",
   "Tag5",
   "Tag6",
+  "Tag6",
 ];
 
 export default function SearchBar() {
@@ -31,7 +32,11 @@ export default function SearchBar() {
             label="Card name"
             className="mb-3"
           >
-            <Form.Control type="name" placeholder="Strike" />
+            <Form.Control
+              type="name"
+              placeholder="Strike"
+              style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+            />
           </FloatingLabel>
         </Col>
         <Col xs={4}>
@@ -40,7 +45,11 @@ export default function SearchBar() {
             label="Tags"
             className="mb-3"
           >
-            <Form.Control type="tags" placeholder="Physical" />
+            <Form.Control
+              type="tags"
+              placeholder="Physical"
+              style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+            />
           </FloatingLabel>
         </Col>
       </Row>

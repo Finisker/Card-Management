@@ -1,0 +1,162 @@
+import { Children, useState } from "react";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/esm/Button";
+import CardDetails from "./CardDetails";
+import TagDetails from "./TagDetails";
+import "../styles/Display.css";
+
+const testCards = [
+  {
+    title: "Strike",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "strike.jpg",
+
+    manaCost: 2,
+    goldCost: 1,
+
+    tags: [
+      {
+        id: 1,
+      },
+    ],
+  },
+  {
+    title: "Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "strike.jpg",
+
+    manaCost: 14,
+    goldCost: 12,
+
+    tags: [
+      {
+        id: 1,
+      },
+    ],
+  },
+];
+
+const testTags = [
+  {
+    title: "Heal Scruvy",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "citrina.png",
+  },
+  {
+    title: "Burn motherf***er",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "fire.png",
+  },
+];
+export default function Display() {
+  const [cards, setCards] = useState(testCards);
+  const [tags, setTags] = useState(testTags);
+  const [tabKey, setTabKey] = useState("cards");
+
+  // useEffect(() => {
+  //   fetch("http://localhost:8080/cards/all")
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         console.log("Response error");
+  //         return;
+  //       }
+
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setCards(data);
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
+  // function addCard(card) {
+  //   if (!cards) {
+  //     setCards([]);
+  //   }
+
+  //   setCards((prev) => [...prev, card]);
+  // }
+
+  function handleCardOnClikck(index) {
+    console.log("clicked on card: ", index);
+  }
+
+  function handleTagOnClikck(index) {
+    console.log("clicked on tag: ", index);
+  }
+
+  return (
+    <Container className="test2">
+      <Tabs
+        defaultActiveKey="cards"
+        transition={false}
+        className="container"
+        onSelect={(e) => setTabKey(e)}
+      >
+        <Tab
+          eventKey="cards"
+          title="Cards"
+          className={"container pt-3 pb-3 h-100"}
+          style={{
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <Container className="d-flex gap-3 flex-wrap justify-content-start">
+            {cards &&
+              cards.map((card, index) => {
+                return (
+                  <label
+                    key={index}
+                    onClick={() => handleCardOnClikck(index)}
+                    style={{
+                      cursor: "pointer",
+                      backgroundColor: "rgba(255,255,255,0.5)",
+                    }}
+                  >
+                    <CardDetails data={card} size={14} id={"card" + index} />
+                  </label>
+                );
+              })}
+          </Container>
+        </Tab>
+        <Tab
+          eventKey="tags"
+          title="Tags"
+          className={"container gap-3 pt-3 pb-3"}
+          style={{
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <Container className="d-flex gap-3 flex-wrap justify-content-start">
+            {tags &&
+              tags.map((tag, index) => {
+                return (
+                  <label
+                    key={index}
+                    onClick={() => handleTagOnClikck(index)}
+                    style={{
+                      cursor: "pointer",
+                      backgroundColor: "rgba(255,255,255,0.5)",
+                    }}
+                  >
+                    <TagDetails key={index} data={tag} size={14} />
+                  </label>
+                );
+              })}
+          </Container>
+        </Tab>
+      </Tabs>
+    </Container>
+  );
+}
