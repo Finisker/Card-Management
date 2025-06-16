@@ -24,11 +24,10 @@ public class Enemy {
     private String description;
     @Column(name = "bite_effect")
     private String biteEffect;
-
     @Column(name = "attack_damage")
-    private Integer attackDamage;
+    private String attackDamage;
     @Column(name = "health_points")
-    private Integer healthPoints;
+    private String healthPoints;
     @Column(name = "stun_points")
-    private Integer stunPoints;
+    private String stunPoints;
 }

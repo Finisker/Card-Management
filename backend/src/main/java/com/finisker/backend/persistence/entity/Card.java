@@ -34,11 +34,10 @@ public class Card {
     private String description;
     @Column(name = "image_path")
     private String imagePath;
-
     @Column(name = "mana_cost")
-    private Integer manaCost;
+    private String manaCost;
     @Column(name = "gold_cost")
-    private Integer goldCost;
+    private String goldCost;
 
     @ManyToMany
     @JoinTable(name = "card_tag", joinColumns = @JoinColumn(name = "card_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
