@@ -60,16 +60,6 @@ export default function CardCreationForm(props) {
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-
-  // return (
-  //   <Form onSubmit={(e) => handleSubmit(e)}>
-  //
-  //     <Button variant="primary" type="submit">
-  //       Submit
-  //     </Button>
-  //   </Form>
-  // );
-
   return (
     <Card
       style={{
@@ -129,7 +119,16 @@ export default function CardCreationForm(props) {
             />
           </Form.Group>
         </Card.Title>
-        <Card.Img className="image" src={props.data.imagePath} />
+        {/* <Card.Img src={props.data.imagePath} /> */}
+        <Form.Group
+          controlId="formFile"
+          className="image"
+          name="image"
+          onChange={(e) => handleChange(e)}
+          value={formData.image}
+        >
+          <Form.Control type="file" />
+        </Form.Group>
         <Form.Group
           className="description"
           controlId="cardForm.ControlTextarea1"
