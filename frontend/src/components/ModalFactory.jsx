@@ -1,11 +1,27 @@
 import Modal from "react-bootstrap/Modal";
 import CardModal from "./CardModal";
 import TagModal from "./TagModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 
 export default function ModalFactory(props) {
   const [edit, setEdit] = useState(false);
+  const [displayData, setDisplayData] = useState(null);
+  const [formData, setFormData] = useState(null);
+
+  useEffect(() => {
+    if (props.content) setDisplayData(props.content.data);
+  }, [props.content]);
+
+  function bubbleData(data) {
+    setFormData(data);
+  }
+
+  function handleSaveEdit() {
+    setDisplayData(formData);
+    setEdit(false);
+    props.bubbleData(formData);
+  }
 
   return (
     <Modal
@@ -23,18 +39,19 @@ export default function ModalFactory(props) {
       }}
       centered
     >
-      {props.content && props.content.type == "card" && (
+      {displayData && props.content.type == "card" && (
         <CardModal
           edit={edit}
           handleClose={props.handleClose}
-          card={props.content.data}
+          card={displayData}
+          bubbleData={bubbleData}
         />
       )}
-      {props.content && props.content.type == "tag" && (
+      {displayData && props.content.type == "tag" && (
         <TagModal
           edit={edit}
           handleClose={props.handleClose}
-          tag={props.content.data}
+          tag={displayData}
         />
       )}
       <Modal.Footer>
@@ -50,7 +67,7 @@ export default function ModalFactory(props) {
         )}
         {edit && (
           <>
-            <Button variant="secondary" onClick={() => setEdit(false)}>
+            <Button variant="secondary" onClick={() => handleSaveEdit()}>
               Save changes
             </Button>
             <Button variant="primary" onClick={() => setEdit(false)}>

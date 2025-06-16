@@ -11,6 +11,7 @@ import ModalFactory from "./ModalFactory";
 
 const testCards = [
   {
+    id: 1,
     name: "Strike",
     type: "postman_type",
     description:
@@ -28,6 +29,7 @@ const testCards = [
     ],
   },
   {
+    id: 2,
     name: "Burning Strike2",
     type: "postman_type",
     description:
@@ -87,7 +89,7 @@ export default function Display(props) {
       : cardsByName;
 
     return cardsByTags;
-  }, [props.query]);
+  }, [props.query, cards, tags]);
 
   // useEffect(() => {
   //   fetch("http://localhost:8080/cards/all")
@@ -116,22 +118,27 @@ export default function Display(props) {
   //   setCards((prev) => [...prev, card]);
   // }
 
-  function handleCardOnClikck(index) {
+  function handleCardOnClikck(card) {
     const newModalContent = {
       type: "card",
-      data: displayCards[index],
+      data: card,
     };
     setModalContent(newModalContent);
     setShowModal(true);
   }
 
-  function handleTagOnClikck(index) {
+  function handleTagOnClikck(tag) {
     const newModalContent = {
       type: "tag",
-      data: tags[index],
+      data: tag,
     };
     setModalContent(newModalContent);
     setShowModal(true);
+  }
+
+  function bubbleData(data) {
+    const newCards = cards.filter((card) => card.id !== data.id);
+    setCards([...newCards, data]);
   }
 
   return (
@@ -152,20 +159,22 @@ export default function Display(props) {
             }}
           >
             <Container className="d-flex gap-3 flex-wrap justify-content-start">
-              {displayCards.map((card, index) => {
-                return (
-                  <label
-                    key={index}
-                    onClick={() => handleCardOnClikck(index)}
-                    style={{
-                      cursor: "pointer",
-                      backgroundColor: "rgba(255,255,255,0.5)",
-                    }}
-                  >
-                    <CardDetails data={card} size={14} id={"card" + index} />
-                  </label>
-                );
-              })}
+              {displayCards
+                .toSorted((a, b) => a.name.localeCompare(b.name))
+                .map((card, index) => {
+                  return (
+                    <label
+                      key={index}
+                      onClick={() => handleCardOnClikck(card)}
+                      style={{
+                        cursor: "pointer",
+                        backgroundColor: "rgba(255,255,255,0.5)",
+                      }}
+                    >
+                      <CardDetails data={card} size={14} id={"card" + index} />
+                    </label>
+                  );
+                })}
             </Container>
           </Tab>
           <Tab
@@ -182,7 +191,7 @@ export default function Display(props) {
                   return (
                     <label
                       key={index}
-                      onClick={() => handleTagOnClikck(index)}
+                      onClick={() => handleTagOnClikck(tag)}
                       style={{
                         cursor: "pointer",
                         backgroundColor: "rgba(255,255,255,0.5)",
@@ -204,6 +213,7 @@ export default function Display(props) {
         keyboard={false}
         content={modalContent}
         handleClose={() => setShowModal(false)}
+        bubbleData={bubbleData}
       />
     </>
   );

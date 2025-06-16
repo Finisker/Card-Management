@@ -1,73 +1,168 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useEffect, useMemo } from "react";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import "../styles/Details.css";
 
 import { useState } from "react";
 
-const emptyFormData = { title: "", description: "" };
-
 export default function CardCreationForm(props) {
-  const [formData, setFormData] = useState(emptyFormData);
+  const [formData, setFormData] = useState(props.data);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const size = {
+    width: props.size,
+    height: props.size * 1.5,
+    fontSize: props.size / 9,
+  };
+  const fontSize = {
+    title: (size.fontSize / formData.name.length) * 12,
+    description: (size.fontSize / Math.sqrt(formData.description.length)) * 6.8,
+    manaCost: (size.fontSize / formData.manaCost.toString().length) * 1.3,
+    goldCost: (size.fontSize / formData.goldCost.toString().length) * 1.3,
+  };
 
-    fetch("http://localhost:8080/cards/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Response error");
-          return;
-        }
+  useEffect(() => {
+    props.bubbleData(formData);
+  }, [formData]);
 
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Card added", data);
-        props.addCard(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  // function handleSubmit(e) {
+  //   e.preventDefault();
 
-    props.addCard(formData);
-    setFormData(emptyFormData);
-  }
+  //   fetch("http://localhost:8080/cards/add", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(formData),
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         console.log("Response error");
+  //         return;
+  //       }
+
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log("Card added", data);
+  //       props.addCard(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+
+  //   props.addCard(formData);
+  //   setFormData(emptyFormData);
+  // }
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  // return (
+  //   <Form onSubmit={(e) => handleSubmit(e)}>
+  //
+  //     <Button variant="primary" type="submit">
+  //       Submit
+  //     </Button>
+  //   </Form>
+  // );
+
   return (
-    <Form onSubmit={(e) => handleSubmit(e)}>
-      <Form.Group className="mb-3" controlId="cardForm.ControlInput1">
-        <Form.Label>Card title</Form.Label>
-        <Form.Control
-          name="title"
-          placeholder="Strike"
-          onChange={(e) => handleChange(e)}
-          value={formData.title}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="cardForm.ControlTextarea1">
-        <Form.Label>Descrition</Form.Label>
-        <Form.Control
-          name="description"
-          as="textarea"
-          rows={3}
-          placeholder="Me Kronk! I hit hard!"
-          onChange={(e) => handleChange(e)}
-          value={formData.description}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+    <Card
+      style={{
+        width: size.width + "rem",
+        height: size.height + "rem",
+        fontSize: size.fontSize + "rem",
+        backgroundColor: "inherit",
+      }}
+    >
+      <Card.Body className="card-body">
+        <Card.Title className="card-title">
+          <Form.Group
+            className="title"
+            controlId="cardForm.ControlInput1"
+            style={{ display: "flex", justifyContent: "center", width: "100%" }}
+          >
+            <Form.Control
+              className="modal-form cost manaCost"
+              name="manaCost"
+              onChange={(e) => handleChange(e)}
+              value={formData.manaCost}
+              style={{
+                color: "black",
+                fontSize: Math.min(size.fontSize, fontSize.manaCost) + "rem",
+                width: size.width / 6.7 + "rem",
+                textAlign: "center",
+                fontWeight: "500",
+              }}
+            />
+            <Form.Control
+              className="modal-form"
+              name="name"
+              onChange={(e) => handleChange(e)}
+              value={formData.name}
+              style={{
+                fontSize: Math.min(fontSize.title, size.fontSize * 1.3) + "rem",
+                color: "black",
+                textAlign: "center",
+                padding: "0",
+                border: "0",
+                backgroundColor: "transparent",
+                fontWeight: "500",
+              }}
+            />
+            <Form.Control
+              className="modal-form cost goldCost"
+              name="goldCost"
+              onChange={(e) => handleChange(e)}
+              value={formData.goldCost}
+              style={{
+                color: "black",
+                fontSize: Math.min(size.fontSize, fontSize.goldCost) + "rem",
+                width: size.width / 6.7 + "rem",
+                textAlign: "center",
+                fontWeight: "500",
+              }}
+            />
+          </Form.Group>
+        </Card.Title>
+        <Card.Img className="image" src={props.data.imagePath} />
+        <Form.Group
+          className="description"
+          controlId="cardForm.ControlTextarea1"
+        >
+          <Form.Control
+            className="modal-form"
+            name="description"
+            as="textarea"
+            rows={3}
+            onChange={(e) => handleChange(e)}
+            value={formData.description}
+            style={{
+              fontSize:
+                Math.min(fontSize.description, size.fontSize * 0.85) + "rem",
+              color: "black",
+              padding: "0",
+              border: "0",
+              backgroundColor: "transparent",
+              overflow: "hidden",
+              resize: "none",
+              height: size.height * 3 + "%",
+              textAlign: "justify",
+              textJustify: "inter-word",
+            }}
+          />
+        </Form.Group>
+        <Container className="tags">
+          <Card.Img className="tag" src="fire.png" />
+          <Card.Img className="tag" src="citrina.png" />
+          <Card.Img className="tag" src="fire.png" />
+          <Card.Img className="tag" src="citrina.png" />
+        </Container>
+      </Card.Body>
+    </Card>
   );
 }

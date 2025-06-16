@@ -1,9 +1,12 @@
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import CardDetails from "./CardDetails";
-import { useState } from "react";
+import CardCreationForm from "./CardCreationForm";
 
 export default function CardModal(props) {
+  function bubbleData(data) {
+    props.bubbleData(data);
+  }
+
   return (
     <Modal.Body
       style={{
@@ -12,7 +15,9 @@ export default function CardModal(props) {
       }}
     >
       {!props.edit && <CardDetails data={props.card} size={22} />}
-      {props.edit && <p>Editing a Card</p>}
+      {props.edit && (
+        <CardCreationForm data={props.card} size={22} bubbleData={bubbleData} />
+      )}
     </Modal.Body>
   );
 }

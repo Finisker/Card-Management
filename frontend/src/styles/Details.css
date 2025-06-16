@@ -125,3 +125,7 @@
 .right-art {
   right: 3%;
 }
+
+.form-control.modal-form:focus {
+  box-shadow: none;
+}
