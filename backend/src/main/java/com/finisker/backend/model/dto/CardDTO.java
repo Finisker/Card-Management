@@ -13,8 +13,8 @@ public class CardDTO {
     private String description;
     private String imagePath;
 
-    private Integer manaCost;
-    private Integer goldCost;
+    private String manaCost;
+    private String goldCost;
 
     private Set<TagDTO> tags;
 }
