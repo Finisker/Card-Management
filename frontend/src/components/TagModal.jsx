@@ -4,20 +4,14 @@ import TagDetails from "./TagDetails";
 
 export default function TagModal(props) {
   return (
-    <>
-      <Modal.Body
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <TagDetails data={props.tag} size={22} />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary">Edit</Button>
-        <Button variant="primary">Save changes</Button>
-      </Modal.Footer>
-      ;
-    </>
+    <Modal.Body
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      {!props.edit && <TagDetails data={props.tag} size={22} />}
+      {props.edit && <p>Editing a Tag</p>}
+    </Modal.Body>
   );
 }
