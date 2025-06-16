@@ -10,7 +10,7 @@ export default function CardDetails(props) {
   };
 
   const fontSize = {
-    title: (size.fontSize / props.data.title.length) * 12,
+    title: (size.fontSize / props.data.name.length) * 12,
     description:
       (size.fontSize / Math.sqrt(props.data.description.length)) * 6.8,
   };
@@ -33,7 +33,7 @@ export default function CardDetails(props) {
               fontSize: Math.min(fontSize.title, size.fontSize * 1.3) + "rem",
             }}
           >
-            {props.data.title}
+            {props.data.name}
           </span>
           <span className="cost goldCost">{props.data.goldCost}</span>
         </Card.Title>

@@ -11,7 +11,7 @@ export default function TagDetails(props) {
   const fontSize = {
     title: (size.fontSize / props.data.name.length) * 12,
     description:
-      (size.fontSize / Math.sqrt(props.data.description.length)) * 10,
+      (size.fontSize / Math.sqrt(props.data.description.length)) * 9.6,
   };
 
   return (
@@ -38,7 +38,7 @@ export default function TagDetails(props) {
         <Card.Text
           className="description"
           style={{
-            fontSize: Math.min(fontSize.description, size.fontSize * 2) + "rem",
+            fontSize: Math.min(fontSize.description, size.fontSize * 1) + "rem",
           }}
         >
           {props.data.description}

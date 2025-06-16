@@ -3,13 +3,12 @@ import CardDetails from "./components/CardDetails";
 import Chip from "./components/Chip";
 import SearchBar from "./components/SearchBar";
 import Display from "./components/Display";
-import CreationModal from "./components/CreationModal";
+import CreationModal from "./components/ModalFactory";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
 import "./styles/App.css";
 
 export default function App() {
-  const [showCardModal, setShowCardModal] = useState(false);
   const [query, setQuery] = useState(null);
 
   function search(query) {
@@ -24,10 +23,6 @@ export default function App() {
       <div className="cardsdisplay-container">
         <Display query={query} />
       </div>
-      <CreationModal
-        show={showCardModal}
-        onHide={() => setShowCardModal(false)}
-      />
     </div>
   );
 }
