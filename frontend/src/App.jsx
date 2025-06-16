@@ -10,18 +10,19 @@ import "./styles/App.css";
 
 export default function App() {
   const [showCardModal, setShowCardModal] = useState(false);
+  const [query, setQuery] = useState(null);
+
+  function search(query) {
+    setQuery(query);
+  }
 
   return (
     <div className="app-container container-fluid h-100">
       <div className="searchbar-container">
-        <SearchBar />
+        <SearchBar search={search} />
       </div>
       <div className="cardsdisplay-container">
-        <Display>
-          {/* <Button variant="primary" onClick={() => setShowCardModal(true)}>
-          Launch demo modal
-        </Button> */}
-        </Display>
+        <Display query={query} />
       </div>
       <CreationModal
         show={showCardModal}

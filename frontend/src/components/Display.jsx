@@ -1,4 +1,4 @@
-import { Children, useState } from "react";
+import { Children, useMemo, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Container from "react-bootstrap/Container";
@@ -21,11 +21,12 @@ const testCards = [
     tags: [
       {
         id: 1,
+        name: "Heal2",
       },
     ],
   },
   {
-    title: "Strike2",
+    title: "Burning Strike2",
     type: "postman_type",
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
@@ -37,6 +38,11 @@ const testCards = [
     tags: [
       {
         id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
       },
     ],
   },
@@ -44,22 +50,40 @@ const testCards = [
 
 const testTags = [
   {
-    title: "Heal Scruvy",
+    name: "Heal Scruvy",
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
     imagePath: "citrina.png",
   },
   {
-    title: "Burn motherf***er",
+    name: "Burn motherf***er",
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
     imagePath: "fire.png",
   },
 ];
-export default function Display() {
+export default function Display(props) {
   const [cards, setCards] = useState(testCards);
   const [tags, setTags] = useState(testTags);
   const [tabKey, setTabKey] = useState("cards");
+
+  const displayCards = useMemo(() => {
+    if (!props.query) return cards;
+
+    const cardsByName = cards.filter((card) =>
+      card.title.toLowerCase().includes(props.query.cardName.toLowerCase())
+    );
+
+    const cardsByTags = props.query.tags.length
+      ? cardsByName.filter((card) => {
+          return props.query.tags.every((tag) => {
+            return card.tags.map((tag) => tag.name).includes(tag);
+          });
+        })
+      : cardsByName;
+
+    return cardsByTags;
+  }, [props.query]);
 
   // useEffect(() => {
   //   fetch("http://localhost:8080/cards/all")
@@ -113,21 +137,20 @@ export default function Display() {
           }}
         >
           <Container className="d-flex gap-3 flex-wrap justify-content-start">
-            {cards &&
-              cards.map((card, index) => {
-                return (
-                  <label
-                    key={index}
-                    onClick={() => handleCardOnClikck(index)}
-                    style={{
-                      cursor: "pointer",
-                      backgroundColor: "rgba(255,255,255,0.5)",
-                    }}
-                  >
-                    <CardDetails data={card} size={14} id={"card" + index} />
-                  </label>
-                );
-              })}
+            {displayCards.map((card, index) => {
+              return (
+                <label
+                  key={index}
+                  onClick={() => handleCardOnClikck(index)}
+                  style={{
+                    cursor: "pointer",
+                    backgroundColor: "rgba(255,255,255,0.5)",
+                  }}
+                >
+                  <CardDetails data={card} size={14} id={"card" + index} />
+                </label>
+              );
+            })}
           </Container>
         </Tab>
         <Tab
