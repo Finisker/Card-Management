@@ -19,8 +19,8 @@ export default function CardCreationForm(props) {
   const fontSize = {
     title: (size.fontSize / formData.name.length) * 12,
     description: (size.fontSize / Math.sqrt(formData.description.length)) * 6.8,
-    manaCost: (size.fontSize / formData.manaCost.toString().length) * 1.3,
-    goldCost: (size.fontSize / formData.goldCost.toString().length) * 1.3,
+    manaCost: (size.fontSize / formData.manaCost.length) * 1.3,
+    goldCost: (size.fontSize / formData.goldCost.length) * 1.3,
   };
 
   useEffect(() => {

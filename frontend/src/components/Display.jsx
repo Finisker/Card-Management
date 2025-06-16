@@ -18,8 +18,8 @@ const testCards = [
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
     imagePath: "strike.jpg",
 
-    manaCost: 2,
-    goldCost: 1,
+    manaCost: "2",
+    goldCost: "1",
 
     tags: [
       {
@@ -36,8 +36,8 @@ const testCards = [
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
     imagePath: "strike.jpg",
 
-    manaCost: 14,
-    goldCost: 12,
+    manaCost: "14",
+    goldCost: "12",
 
     tags: [
       {
