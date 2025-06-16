@@ -8,7 +8,7 @@ import lombok.Data;
 public class CardDTO {
     private Long id;
 
-    private String title;
+    private String name;
     private String type;
     private String description;
     private String imagePath;

@@ -26,8 +26,8 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name")
+    private String name;
     @Column(name = "type")
     private String type;
     @Column(name = "description")

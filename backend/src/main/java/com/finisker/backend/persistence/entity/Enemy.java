@@ -16,8 +16,8 @@ public class Enemy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name")
+    private String name;
     @Column(name = "image_path")
     private String imagePath;
     @Column(name = "description")
