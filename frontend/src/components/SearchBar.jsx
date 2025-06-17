@@ -2,33 +2,44 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import Chip from "./Chip";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "../styles/SearchBar.css";
 
+const testTags = ["Heal", "tag2", "tag3", "tag4", "tag5"];
+
 export default function SearchBar(props) {
-  const [tags, setTags] = useState([]);
+  const [activeTags, setActiveTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
   const [cardInput, setCardInput] = useState("");
+
+  const dropdownTags = useMemo(() => {
+    return testTags
+      .filter((tag) => {
+        return tag.includes(tagInput);
+      })
+      .filter((tag) => {
+        return !activeTags.includes(tag);
+      });
+  }, [activeTags, tagInput]);
 
   useEffect(() => {
     const query = {
       cardName: cardInput,
-      tags: tags,
+      tags: activeTags,
     };
     props.search(query);
-  }, [tags, cardInput]);
+  }, [activeTags, cardInput]);
 
   function handleOnClick(e) {
     const tag = e.target.innerText;
-    setTags(tags.filter((ele) => ele != tag));
+    setActiveTags(activeTags.filter((ele) => ele != tag));
   }
 
-  function handleTagKeyDown(e) {
-    if (e.code !== "Enter") return;
-
-    setTags((prev) => [...prev, tagInput]);
-    setTagInput("");
+  function handleDropDownItemClick(e) {
+    setActiveTags((prev) => [...prev, e.target.innerText]);
   }
 
   return (
@@ -42,7 +53,7 @@ export default function SearchBar(props) {
           >
             <Form.Control
               type="name"
-              placeholder="Strike"
+              placeholder=""
               value={cardInput}
               onChange={(e) => setCardInput(e.target.value)}
               style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
@@ -50,31 +61,49 @@ export default function SearchBar(props) {
           </FloatingLabel>
         </Col>
         <Col xs={4}>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Tags"
-            className="mb-3"
+          <DropdownButton
+            variant="primary"
+            id="dropdown-basic"
+            drop="end"
+            title="Tags"
           >
             <Form.Control
               type="tags"
-              placeholder="Physical"
+              placeholder=""
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
-              onKeyDown={(e) => handleTagKeyDown(e)}
-              style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+              style={{
+                backgroundColor: "rgba(255,255,255,0.1)",
+              }}
             />
-          </FloatingLabel>
+            <Dropdown.Divider />
+            {dropdownTags &&
+              dropdownTags.map((tag, index) => {
+                return (
+                  <Dropdown.Item
+                    key={index}
+                    onClick={(e) => handleDropDownItemClick(e)}
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    {tag}
+                  </Dropdown.Item>
+                );
+              })}
+          </DropdownButton>
         </Col>
       </Row>
       <Row>
         <Col className="d-flex align-items-start justify-content-start gap-3 mb-3 flex-wrap">
-          {tags.map((tag, index) => {
-            return (
-              <Chip key={index} handleOnClick={handleOnClick}>
-                {tag}
-              </Chip>
-            );
-          })}
+          {activeTags &&
+            activeTags.map((tag, index) => {
+              return (
+                <Chip key={index} handleOnClick={handleOnClick}>
+                  {tag}
+                </Chip>
+              );
+            })}
         </Col>
       </Row>
     </div>
