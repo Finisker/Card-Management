@@ -8,18 +8,7 @@ import Chip from "./Chip";
 import { useEffect, useMemo, useState } from "react";
 import "../styles/SearchBar.css";
 
-const testTags = [
-  "Heal",
-  "tag2",
-  "tag3",
-  "tag4",
-  "tag5",
-  "Heal",
-  "tag2",
-  "tag3",
-  "tag4",
-  "tag5",
-];
+const testTags = ["Heal", "tag2", "tag3", "tag4", "tag5"];
 
 export default function SearchBar(props) {
   const [activeTags, setActiveTags] = useState([]);
@@ -56,33 +45,30 @@ export default function SearchBar(props) {
 
   return (
     <div className="search-container container flex-column">
-      <Row>
+      <Row className="align-items-center">
         <Col>
           <FloatingLabel
             controlId="floatingInput"
             label="Card name"
-            className="mb-3"
+            className=""
           >
             <Form.Control
               type="name"
               placeholder=""
               value={cardInput}
+              autocomplete="off"
               onChange={(e) => setCardInput(e.target.value)}
               style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
             />
           </FloatingLabel>
         </Col>
-        <Col xs={4}>
-          <DropdownButton
-            variant="primary"
-            id="dropdown-basic"
-            drop="end"
-            title="Tags"
-          >
+        <Col xs={2}>
+          <DropdownButton id="dropdown-basic" drop="end" title="Tags">
             <Form.Control
               type="tags"
               placeholder=""
               value={tagInput}
+              autocomplete="off"
               onChange={(e) => setTagInput(e.target.value)}
               style={{
                 backgroundColor: "rgba(255,255,255,0.1)",
@@ -109,7 +95,7 @@ export default function SearchBar(props) {
           </DropdownButton>
         </Col>
       </Row>
-      <Row>
+      <Row className="mt-3">
         <Col className="d-flex align-items-start justify-content-start gap-3 mb-3 flex-wrap">
           {activeTags &&
             activeTags.map((tag, index) => {
