@@ -17,3 +17,13 @@
 .dropdown-item:focus {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+.dropdown-menu.show {
+  padding-top: 1px;
+}
+
+.scrollable-content {
+  max-height: 18vh;
+  overflow-y: auto;
+  padding-top: 0; /* No need for padding because sticky handles spacing */
+}

@@ -8,7 +8,18 @@ import Chip from "./Chip";
 import { useEffect, useMemo, useState } from "react";
 import "../styles/SearchBar.css";
 
-const testTags = ["Heal", "tag2", "tag3", "tag4", "tag5"];
+const testTags = [
+  "Heal",
+  "tag2",
+  "tag3",
+  "tag4",
+  "tag5",
+  "Heal",
+  "tag2",
+  "tag3",
+  "tag4",
+  "tag5",
+];
 
 export default function SearchBar(props) {
   const [activeTags, setActiveTags] = useState([]);
@@ -30,6 +41,7 @@ export default function SearchBar(props) {
       cardName: cardInput,
       tags: activeTags,
     };
+    setTagInput("");
     props.search(query);
   }, [activeTags, cardInput]);
 
@@ -74,23 +86,26 @@ export default function SearchBar(props) {
               onChange={(e) => setTagInput(e.target.value)}
               style={{
                 backgroundColor: "rgba(255,255,255,0.1)",
+                zIndex: 1,
+                backdropFilter: "blur(8px)",
               }}
             />
-            <Dropdown.Divider />
-            {dropdownTags &&
-              dropdownTags.map((tag, index) => {
-                return (
-                  <Dropdown.Item
-                    key={index}
-                    onClick={(e) => handleDropDownItemClick(e)}
-                    style={{
-                      color: "white",
-                    }}
-                  >
-                    {tag}
-                  </Dropdown.Item>
-                );
-              })}
+            <div className="scrollable-content">
+              {dropdownTags &&
+                dropdownTags.map((tag, index) => {
+                  return (
+                    <Dropdown.Item
+                      key={index}
+                      onClick={(e) => handleDropDownItemClick(e)}
+                      style={{
+                        color: "white",
+                      }}
+                    >
+                      {tag}
+                    </Dropdown.Item>
+                  );
+                })}
+            </div>
           </DropdownButton>
         </Col>
       </Row>
