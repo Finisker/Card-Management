@@ -16,7 +16,6 @@ const testCards = [
     type: "postman_type",
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-    imagePath: "strike.jpg",
 
     manaCost: "2",
     goldCost: "1",
@@ -34,7 +33,195 @@ const testCards = [
     type: "postman_type",
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-    imagePath: "strike.jpg",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
 
     manaCost: "14",
     goldCost: "12",

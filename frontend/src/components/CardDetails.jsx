@@ -37,7 +37,7 @@ export default function CardDetails(props) {
           </span>
           <span className="cost goldCost">{props.data.goldCost}</span>
         </Card.Title>
-        <Card.Img className="image" src={props.data.imagePath} />
+        <Card.Img className="image" src={props.data.image} />
         <Card.Text
           className="description"
           style={{

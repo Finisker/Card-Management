@@ -60,6 +60,11 @@ export default function CardCreationForm(props) {
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
+
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: URL.createObjectURL(file) });
+  }
   return (
     <Card
       style={{
@@ -119,15 +124,27 @@ export default function CardCreationForm(props) {
             />
           </Form.Group>
         </Card.Title>
-        {/* <Card.Img src={props.data.imagePath} /> */}
         <Form.Group
-          controlId="formFile"
           className="image"
+          controlId="imageInput"
           name="image"
-          onChange={(e) => handleChange(e)}
-          value={formData.image}
+          onChange={(e) => handleImageChange(e)}
         >
-          <Form.Control type="file" />
+          <Form.Label className="w-100 h-100 d-flex align-content-center">
+            <Card.Img
+              src={formData.image}
+              style={{
+                overflow: "hidden",
+                borderRadius: "50%",
+              }}
+            />
+          </Form.Label>
+          <Form.Control
+            type="file"
+            style={{
+              display: "none",
+            }}
+          />
         </Form.Group>
         <Form.Group
           className="description"
