@@ -56,7 +56,7 @@ export default function SearchBar(props) {
               type="name"
               placeholder=""
               value={cardInput}
-              autocomplete="off"
+              autoComplete="off"
               onChange={(e) => setCardInput(e.target.value)}
               style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
             />
