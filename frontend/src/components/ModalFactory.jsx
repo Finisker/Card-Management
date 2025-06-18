@@ -10,7 +10,10 @@ export default function ModalFactory(props) {
   const [formData, setFormData] = useState(null);
 
   useEffect(() => {
-    if (props.content) setDisplayData(props.content.data);
+    if (props.content) {
+      setDisplayData(props.content.data);
+      setEdit(props.content.create);
+    }
   }, [props.content]);
 
   function bubbleData(data) {
@@ -54,6 +57,7 @@ export default function ModalFactory(props) {
           tag={displayData}
         />
       )}
+      {}
       <Modal.Footer>
         {!edit && (
           <>

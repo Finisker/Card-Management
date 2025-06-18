@@ -1,6 +1,8 @@
 import { Children, useMemo, useState } from "react";
 import Tab from "react-bootstrap/Tab";
+import Card from "react-bootstrap/Card";
 import Tabs from "react-bootstrap/Tabs";
+import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/esm/Button";
 import CardDetails from "./CardDetails";
@@ -253,10 +255,22 @@ const testTags = [
     imagePath: "fire.png",
   },
 ];
+
+const emptyCard = {
+  id: -1,
+  name: "",
+  type: "",
+  description: "",
+
+  manaCost: "",
+  goldCost: "",
+
+  tags: [],
+};
+
 export default function Display(props) {
   const [cards, setCards] = useState(testCards);
   const [tags, setTags] = useState(testTags);
-  const [tabKey, setTabKey] = useState("cards");
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
@@ -305,10 +319,11 @@ export default function Display(props) {
   //   setCards((prev) => [...prev, card]);
   // }
 
-  function handleCardOnClikck(card) {
+  function handleCardOnClikck(card, create = false) {
     const newModalContent = {
       type: "card",
       data: card,
+      create: create,
     };
     setModalContent(newModalContent);
     setShowModal(true);
@@ -328,15 +343,14 @@ export default function Display(props) {
     setCards([...newCards, data]);
   }
 
+  function test() {
+    window.alert("test");
+  }
+
   return (
     <>
-      <Container className="test2">
-        <Tabs
-          defaultActiveKey="cards"
-          transition={false}
-          className="container"
-          onSelect={(e) => setTabKey(e)}
-        >
+      <Container className="d-flex flex-column">
+        <Tabs defaultActiveKey="cards" transition={false}>
           <Tab
             eventKey="cards"
             title="Cards"
@@ -345,7 +359,35 @@ export default function Display(props) {
               backgroundColor: "rgba(0,0,0,0.5)",
             }}
           >
-            <Container className="d-flex gap-3 flex-wrap justify-content-start">
+            <Container className="d-flex gap-3 flex-wrap justify-content-between">
+              <div
+                className="container"
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  display: "flex",
+                  justifyContent: "end",
+                }}
+              >
+                <label
+                  onClick={() => handleCardOnClikck(emptyCard, true)}
+                  style={{
+                    position: "absolute",
+                    cursor: "pointer",
+                    transform: "translateX(-30%)",
+                  }}
+                >
+                  <Button
+                    style={{
+                      backgroundColor: "rgba(255, 255, 255, 0.7)",
+                      color: "black",
+                      border: "none",
+                    }}
+                  >
+                    Add new card
+                  </Button>
+                </label>
+              </div>
               {displayCards
                 .toSorted((a, b) => a.name.localeCompare(b.name))
                 .map((card, index) => {
@@ -373,6 +415,34 @@ export default function Display(props) {
             }}
           >
             <Container className="d-flex gap-3 flex-wrap justify-content-start">
+              <div
+                className="container"
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  display: "flex",
+                  justifyContent: "end",
+                }}
+              >
+                <label
+                  onClick={() => handleCardOnClikck(emptyCard, true)}
+                  style={{
+                    position: "absolute",
+                    cursor: "pointer",
+                    transform: "translateX(-32%)",
+                  }}
+                >
+                  <Button
+                    style={{
+                      backgroundColor: "rgba(255, 255, 255, 0.7)",
+                      color: "black",
+                      border: "none",
+                    }}
+                  >
+                    Add new tag
+                  </Button>
+                </label>
+              </div>
               {tags &&
                 tags.map((tag, index) => {
                   return (
