@@ -48,10 +48,12 @@ export default function CardDetails(props) {
           {props.data.description}
         </Card.Text>
         <Container className="tags">
-          <Card.Img className="tag" src="fire.png" />
-          <Card.Img className="tag" src="citrina.png" />
-          <Card.Img className="tag" src="fire.png" />
-          <Card.Img className="tag" src="citrina.png" />
+          {props.data.tags &&
+            props.data.tags.map((tag, index) => {
+              return (
+                <Card.Img key={index} className="tag" src={tag.imagePath} />
+              );
+            })}
         </Container>
       </Card.Body>
     </Card>

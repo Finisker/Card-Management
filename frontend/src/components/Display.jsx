@@ -32,8 +32,19 @@ export default function Display(props) {
         })
       : cardsByName;
 
-    return cardsByTags;
-  }, [props.query, cards]);
+    const mergedCards = cardsByTags.map((card) => {
+      return {
+        ...card,
+        tags: card.tags.map((cTag) => {
+          return tags.find((tTag) => {
+            return tTag.id === cTag.id;
+          });
+        }),
+      };
+    });
+    console.log(mergedCards);
+    return mergedCards;
+  }, [props.query, cards, tags]);
 
   useEffect(() => {
     setTags(testTags);
@@ -201,6 +212,13 @@ export default function Display(props) {
     if (create) {
       newCard.id = maxId(cards) + 1;
     }
+
+    newCard.tags = card.tags.map((cTag) => {
+      return tags.find((tTag) => {
+        return tTag.id === cTag.id;
+      });
+    });
+
     const newModalContent = {
       type: "card",
       data: newCard,
@@ -319,7 +337,7 @@ const testCards = [
         name: "Heal",
       },
       {
-        id: 1,
+        id: 2,
         name: "Heal2",
       },
     ],
