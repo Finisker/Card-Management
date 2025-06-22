@@ -51,6 +51,14 @@ export default function ModalFactory(props) {
       <Modal.Footer>
         {!edit && (
           <>
+            <Button
+              variant="danger"
+              onClick={() =>
+                props.handleDelete(displayData.id, props.content.type)
+              }
+            >
+              Delete
+            </Button>
             <Button variant="secondary" onClick={() => setEdit(true)}>
               Edit
             </Button>
@@ -64,7 +72,7 @@ export default function ModalFactory(props) {
             <Button variant="secondary" onClick={() => handleSaveEdit()}>
               Save changes
             </Button>
-            <Button variant="primary" onClick={() => setEdit(false)}>
+            <Button variant="primary" onClick={() => handleRevert()}>
               Revert Changes
             </Button>
           </>
@@ -81,5 +89,12 @@ export default function ModalFactory(props) {
     setDisplayData(formData);
     setEdit(false);
     props.saveData(formData, props.content.type);
+  }
+
+  function handleRevert() {
+    const confirmed = window.confirm(
+      "Are you sure you want to revert changes?"
+    );
+    if (confirmed) setEdit(false);
   }
 }

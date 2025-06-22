@@ -191,6 +191,7 @@ export default function Display(props) {
         content={modalContent}
         handleClose={() => setShowModal(false)}
         saveData={saveData}
+        handleDelete={handleDelete}
       />
     </>
   );
@@ -257,10 +258,30 @@ export default function Display(props) {
     }
 
     const max = collection.reduce((prev, current) =>
-      prev && prev.y > current.y ? prev : current
+      prev && prev.id > current.id ? prev : current
     );
-    console.log("Max Id", max.id);
+
     return max.id;
+  }
+
+  function handleDelete(id, type) {
+    const confirmed = window.confirm("Are you sure you want to delete?");
+    if (confirmed) {
+      let newData = [];
+      setShowModal(false);
+      switch (type) {
+        case "card":
+          newData = cards.filter((card) => card.id !== id);
+          setCards(newData);
+          return;
+        case "tag":
+          newData = tags.filter((tag) => tag.id !== id);
+          setTags(newData);
+          return;
+        default:
+          return;
+      }
+    }
   }
 }
 
