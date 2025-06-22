@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import CardDetails from "./components/CardDetails";
 import Chip from "./components/Chip";
 import SearchBar from "./components/SearchBar";
@@ -11,9 +11,9 @@ import "./styles/App.css";
 export default function App() {
   const [query, setQuery] = useState(null);
 
-  function search(query) {
+  const search = useCallback((query) => {
     setQuery(query);
-  }
+  }, []);
 
   return (
     <div className="app-container container-fluid h-100">

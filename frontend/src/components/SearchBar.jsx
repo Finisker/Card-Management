@@ -25,14 +25,16 @@ export default function SearchBar(props) {
       });
   }, [activeTags, tagInput]);
 
+  const { search } = props;
+
   useEffect(() => {
     const query = {
       cardName: cardInput,
       tags: activeTags,
     };
     setTagInput("");
-    props.search(query);
-  }, [activeTags, cardInput, props]);
+    search(query);
+  }, [activeTags, cardInput, search]);
 
   return (
     <div className="search-container container flex-column">
