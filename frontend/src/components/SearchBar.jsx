@@ -32,7 +32,7 @@ export default function SearchBar(props) {
     };
     setTagInput("");
     props.search(query);
-  }, [activeTags, cardInput]);
+  }, [activeTags, cardInput, props]);
 
   return (
     <div className="search-container container flex-column">

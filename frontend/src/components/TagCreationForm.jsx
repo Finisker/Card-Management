@@ -23,7 +23,7 @@ export default function TagCreationForm(props) {
 
   useEffect(() => {
     props.bubbleData(formData);
-  }, [formData]);
+  }, [formData, props]);
 
   // function handleSubmit(e) {
   //   e.preventDefault();

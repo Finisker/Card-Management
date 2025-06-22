@@ -25,7 +25,7 @@ export default function CardCreationForm(props) {
 
   useEffect(() => {
     props.bubbleData(formData);
-  }, [formData]);
+  }, [formData, props]);
 
   // function handleSubmit(e) {
   //   e.preventDefault();
