@@ -34,15 +34,6 @@ export default function SearchBar(props) {
     props.search(query);
   }, [activeTags, cardInput]);
 
-  function handleOnClick(e) {
-    const tag = e.target.innerText;
-    setActiveTags(activeTags.filter((ele) => ele != tag));
-  }
-
-  function handleDropDownItemClick(e) {
-    setActiveTags((prev) => [...prev, e.target.innerText]);
-  }
-
   return (
     <div className="search-container container flex-column">
       <Row className="align-items-center">
@@ -100,7 +91,7 @@ export default function SearchBar(props) {
           {activeTags &&
             activeTags.map((tag, index) => {
               return (
-                <Chip key={index} handleOnClick={handleOnClick}>
+                <Chip key={index} onClick={handleOnClick}>
                   {tag}
                 </Chip>
               );
@@ -109,4 +100,13 @@ export default function SearchBar(props) {
       </Row>
     </div>
   );
+
+  function handleOnClick(e) {
+    const tag = e.target.innerText;
+    setActiveTags(activeTags.filter((ele) => ele != tag));
+  }
+
+  function handleDropDownItemClick(e) {
+    setActiveTags((prev) => [...prev, e.target.innerText]);
+  }
 }

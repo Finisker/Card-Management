@@ -21,6 +21,3 @@ export default function CardModal(props) {
     </Modal.Body>
   );
 }
-
-{
-}

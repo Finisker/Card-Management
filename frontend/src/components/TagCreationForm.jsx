@@ -8,19 +8,17 @@ import "../styles/Details.css";
 
 import { useState } from "react";
 
-export default function CardCreationForm(props) {
+export default function TagCreationForm(props) {
   const [formData, setFormData] = useState(props.data);
 
   const size = {
-    width: props.size,
-    height: props.size * 1.5,
+    width: props.size * 1.5,
+    height: props.size,
     fontSize: props.size / 9,
   };
   const fontSize = {
     title: (size.fontSize / formData.name.length) * 12,
-    description: (size.fontSize / Math.sqrt(formData.description.length)) * 6.8,
-    manaCost: (size.fontSize / formData.manaCost.length) * 1.3,
-    goldCost: (size.fontSize / formData.goldCost.length) * 1.3,
+    description: (size.fontSize / Math.sqrt(formData.description.length)) * 9.6,
   };
 
   useEffect(() => {
@@ -57,6 +55,14 @@ export default function CardCreationForm(props) {
   //   setFormData(emptyFormData);
   // }
 
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: URL.createObjectURL(file) });
+  }
   return (
     <Card
       style={{
@@ -67,32 +73,18 @@ export default function CardCreationForm(props) {
       }}
     >
       <Card.Body className="card-body">
-        <Card.Title className="card-title">
+        <Card.Title className="card-title-tag border-bottom">
           <Form.Group
             className="title"
             controlId="cardForm.ControlInput1"
             style={{ display: "flex", justifyContent: "center", width: "100%" }}
           >
             <Form.Control
-              className="modal-form cost manaCost"
-              name="manaCost"
-              placeholder="0"
-              onChange={(e) => handleChange(e)}
-              value={formData.manaCost}
-              style={{
-                color: "black",
-                fontSize: Math.min(size.fontSize, fontSize.manaCost) + "rem",
-                width: size.width / 6.7 + "rem",
-                textAlign: "center",
-                fontWeight: "500",
-              }}
-            />
-            <Form.Control
               className="modal-form"
               name="name"
-              placeholder="Title"
               onChange={(e) => handleChange(e)}
               value={formData.name}
+              placeholder="Title"
               style={{
                 fontSize: Math.min(fontSize.title, size.fontSize * 1.3) + "rem",
                 color: "black",
@@ -103,44 +95,32 @@ export default function CardCreationForm(props) {
                 fontWeight: "500",
               }}
             />
-            <Form.Control
-              className="modal-form cost goldCost"
-              name="goldCost"
-              placeholder="0"
-              onChange={(e) => handleChange(e)}
-              value={formData.goldCost}
-              style={{
-                color: "black",
-                fontSize: Math.min(size.fontSize, fontSize.goldCost) + "rem",
-                width: size.width / 6.7 + "rem",
-                textAlign: "center",
-                fontWeight: "500",
-              }}
-            />
+            <Form.Group
+              className="tag-art right-art"
+              controlId="imageInput"
+              name="image"
+              onChange={(e) => handleImageChange(e)}
+            >
+              <Form.Label className="h-100 d-flex align-content-center">
+                <Card.Img
+                  src={formData.image}
+                  style={{
+                    overflow: "hidden",
+                    borderRadius: "50%",
+                    border: "1px solid",
+                  }}
+                />
+              </Form.Label>
+              <Form.Control
+                type="file"
+                style={{
+                  display: "none",
+                }}
+              />
+            </Form.Group>
           </Form.Group>
         </Card.Title>
-        <Form.Group
-          className="image"
-          controlId="imageInput"
-          name="image"
-          onChange={(e) => handleImageChange(e)}
-        >
-          <Form.Label className="w-100 h-100 d-flex align-content-center">
-            <Card.Img
-              src={formData.image}
-              style={{
-                overflow: "hidden",
-                borderRadius: "50%",
-              }}
-            />
-          </Form.Label>
-          <Form.Control
-            type="file"
-            style={{
-              display: "none",
-            }}
-          />
-        </Form.Group>
+
         <Form.Group
           className="description"
           controlId="cardForm.ControlTextarea1"
@@ -148,42 +128,26 @@ export default function CardCreationForm(props) {
           <Form.Control
             className="modal-form"
             name="description"
-            as="textarea"
             placeholder="Description"
+            as="textarea"
             rows={3}
             onChange={(e) => handleChange(e)}
             value={formData.description}
             style={{
-              fontSize:
-                Math.min(fontSize.description, size.fontSize * 0.85) + "rem",
+              fontSize: Math.min(fontSize.description, size.fontSize) + "rem",
               color: "black",
               padding: "0",
               border: "0",
               backgroundColor: "transparent",
               overflow: "hidden",
               resize: "none",
-              height: size.height * 3 + "%",
+              height: size.height * 7.5 + "%",
               textAlign: "justify",
               textJustify: "inter-word",
             }}
           />
         </Form.Group>
-        <Container className="tags">
-          <Card.Img className="tag" src="fire.png" />
-          <Card.Img className="tag" src="citrina.png" />
-          <Card.Img className="tag" src="fire.png" />
-          <Card.Img className="tag" src="citrina.png" />
-        </Container>
       </Card.Body>
     </Card>
   );
-
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-
-  function handleImageChange(e) {
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: URL.createObjectURL(file) });
-  }
 }

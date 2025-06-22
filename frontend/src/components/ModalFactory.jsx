@@ -16,16 +16,6 @@ export default function ModalFactory(props) {
     }
   }, [props.content]);
 
-  function bubbleData(data) {
-    setFormData(data);
-  }
-
-  function handleSaveEdit() {
-    setDisplayData(formData);
-    setEdit(false);
-    props.bubbleData(formData);
-  }
-
   return (
     <Modal
       show={props.show}
@@ -35,12 +25,12 @@ export default function ModalFactory(props) {
       }}
       backdrop={edit ? "static" : true}
       keyboard={!edit}
+      centered
       style={{
         width: "fit-content",
         left: "50%",
         transform: "translate(-50%, 0%)",
       }}
-      centered
     >
       {displayData && props.content.type == "card" && (
         <CardModal
@@ -55,9 +45,9 @@ export default function ModalFactory(props) {
           edit={edit}
           handleClose={props.handleClose}
           tag={displayData}
+          bubbleData={bubbleData}
         />
       )}
-      {}
       <Modal.Footer>
         {!edit && (
           <>
@@ -82,4 +72,14 @@ export default function ModalFactory(props) {
       </Modal.Footer>
     </Modal>
   );
+
+  function bubbleData(data) {
+    setFormData(data);
+  }
+
+  function handleSaveEdit() {
+    setDisplayData(formData);
+    setEdit(false);
+    props.saveData(formData, props.content.type);
+  }
 }

@@ -1,4 +1,4 @@
-import { Children, useMemo, useState } from "react";
+import { Children, useEffect, useMemo, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Card from "react-bootstrap/Card";
 import Tabs from "react-bootstrap/Tabs";
@@ -11,266 +11,9 @@ import CreationModal from "./ModalFactory";
 import "../styles/Display.css";
 import ModalFactory from "./ModalFactory";
 
-const testCards = [
-  {
-    id: 1,
-    name: "Strike",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "2",
-    goldCost: "1",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-        name: "Heal",
-      },
-      {
-        id: 1,
-        name: "Heal2",
-      },
-    ],
-  },
-];
-
-const testTags = [
-  {
-    name: "Heal Scruvy",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-    imagePath: "citrina.png",
-  },
-  {
-    name: "Burn motherf***er",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-    imagePath: "fire.png",
-  },
-];
-
-const emptyCard = {
-  id: -1,
-  name: "",
-  type: "",
-  description: "",
-
-  manaCost: "",
-  goldCost: "",
-
-  tags: [],
-};
-
 export default function Display(props) {
-  const [cards, setCards] = useState(testCards);
-  const [tags, setTags] = useState(testTags);
+  const [cards, setCards] = useState([]);
+  const [tags, setTags] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
@@ -290,7 +33,12 @@ export default function Display(props) {
       : cardsByName;
 
     return cardsByTags;
-  }, [props.query, cards, tags]);
+  }, [props.query, cards]);
+
+  useEffect(() => {
+    setTags(testTags);
+    setCards(testCards);
+  }, []);
 
   // useEffect(() => {
   //   fetch("http://localhost:8080/cards/all")
@@ -318,34 +66,6 @@ export default function Display(props) {
 
   //   setCards((prev) => [...prev, card]);
   // }
-
-  function handleCardOnClikck(card, create = false) {
-    const newModalContent = {
-      type: "card",
-      data: card,
-      create: create,
-    };
-    setModalContent(newModalContent);
-    setShowModal(true);
-  }
-
-  function handleTagOnClikck(tag) {
-    const newModalContent = {
-      type: "tag",
-      data: tag,
-    };
-    setModalContent(newModalContent);
-    setShowModal(true);
-  }
-
-  function bubbleData(data) {
-    const newCards = cards.filter((card) => card.id !== data.id);
-    setCards([...newCards, data]);
-  }
-
-  function test() {
-    window.alert("test");
-  }
 
   return (
     <>
@@ -425,7 +145,7 @@ export default function Display(props) {
                 }}
               >
                 <label
-                  onClick={() => handleCardOnClikck(emptyCard, true)}
+                  onClick={() => handleTagOnClikck(emptyTag, true)}
                   style={{
                     position: "absolute",
                     cursor: "pointer",
@@ -470,8 +190,340 @@ export default function Display(props) {
         keyboard={false}
         content={modalContent}
         handleClose={() => setShowModal(false)}
-        bubbleData={bubbleData}
+        saveData={saveData}
       />
     </>
   );
+
+  function handleCardOnClikck(card, create = false) {
+    const newCard = JSON.parse(JSON.stringify(card));
+    if (create) {
+      newCard.id = maxId(cards) + 1;
+    }
+    const newModalContent = {
+      type: "card",
+      data: newCard,
+      create: create,
+    };
+    setModalContent(newModalContent);
+    setShowModal(true);
+  }
+
+  function handleTagOnClikck(tag, create = false) {
+    const newTag = JSON.parse(JSON.stringify(tag));
+    if (create) {
+      newTag.id = maxId(tags) + 1;
+    }
+    const newModalContent = {
+      type: "tag",
+      data: newTag,
+      create: create,
+    };
+    setModalContent(newModalContent);
+    setShowModal(true);
+  }
+
+  function saveData(data, type) {
+    let newData;
+
+    switch (type) {
+      case "card":
+        newData = cards.filter((card) => card.id !== data.id);
+        console.log("Saving a card", data);
+        setCards([...newData, data]);
+        return;
+
+      case "tag":
+        newData = tags.filter((tag) => tag.id !== data.id);
+        console.log("Saving a tag", data);
+        setTags([...newData, data]);
+        return;
+
+      default:
+        console.log(
+          "Pass a type to the 'saveData' funtion in 'Display' component"
+        );
+        return;
+    }
+  }
+
+  function maxId(collection) {
+    if (!collection || collection.length == 0) {
+      return 0;
+    }
+
+    if (!collection[0].id) {
+      return -1;
+    }
+
+    const max = collection.reduce((prev, current) =>
+      prev && prev.y > current.y ? prev : current
+    );
+    console.log("Max Id", max.id);
+    return max.id;
+  }
 }
+
+const testCards = [
+  {
+    id: 1,
+    name: "Strike",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "2",
+    goldCost: "1",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 7,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 9,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 10,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 1,
+        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 11,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 1,
+        name: "Heal",
+      },
+      {
+        id: 2,
+        name: "Heal2",
+      },
+    ],
+  },
+];
+
+const testTags = [
+  {
+    id: 1,
+    name: "Heal Scruvy",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "citrina.png",
+  },
+  {
+    id: 2,
+    name: "Burn motherf***er",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "fire.png",
+  },
+];
+
+const emptyTag = {
+  name: "",
+  description: "",
+  imagePath: "",
+};
+
+const emptyCard = {
+  name: "",
+  type: "",
+  description: "",
+
+  manaCost: "",
+  goldCost: "",
+
+  tags: [],
+};
