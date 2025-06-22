@@ -14,11 +14,11 @@ export default function TagCreationForm(props) {
   const size = {
     width: props.size * 1.5,
     height: props.size,
-    fontSize: props.size / 9,
+    fontSize: props.size / 6.5,
   };
   const fontSize = {
     title: (size.fontSize / formData.name.length) * 12,
-    description: (size.fontSize / Math.sqrt(formData.description.length)) * 9.6,
+    description: (size.fontSize / Math.sqrt(formData.description.length)) * 6.4,
   };
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function TagCreationForm(props) {
       <Card.Body className="card-body">
         <Card.Title className="card-title-tag border-bottom">
           <Form.Group
-            className="title"
+            className="tag-title"
             controlId="cardForm.ControlInput1"
             style={{ display: "flex", justifyContent: "center", width: "100%" }}
           >

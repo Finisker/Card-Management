@@ -5,13 +5,13 @@ export default function TagDetails(props) {
   const size = {
     width: props.size * 1.5,
     height: props.size,
-    fontSize: props.size / 9,
+    fontSize: props.size / 6.5,
   };
 
   const fontSize = {
     title: (size.fontSize / props.data.name.length) * 12,
     description:
-      (size.fontSize / Math.sqrt(props.data.description.length)) * 9.6,
+      (size.fontSize / Math.sqrt(props.data.description.length)) * 6.4,
   };
 
   return (
@@ -25,7 +25,7 @@ export default function TagDetails(props) {
       <Card.Body className="card-body">
         <Card.Title className="card-title-tag border-bottom">
           <span
-            className="title"
+            className="tag-title"
             style={{
               fontSize: Math.min(fontSize.title, size.fontSize * 1.3) + "rem",
               color: "black",
