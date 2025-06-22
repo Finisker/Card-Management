@@ -61,7 +61,7 @@ export default function SearchBar(props) {
               type="tags"
               placeholder=""
               value={tagInput}
-              autocomplete="off"
+              autoComplete="off"
               onChange={(e) => setTagInput(e.target.value)}
               style={{
                 backgroundColor: "rgba(255,255,255,0.1)",
