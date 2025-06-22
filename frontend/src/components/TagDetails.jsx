@@ -24,14 +24,16 @@ export default function TagDetails(props) {
     >
       <Card.Body className="card-body">
         <Card.Title className="card-title-tag border-bottom">
-          <Card.Img
-            className="tag-art left-art"
-            src={props.data.imagePath === "" ? null : props.data.imagePath}
-          />
           <span
             className="title"
             style={{
               fontSize: Math.min(fontSize.title, size.fontSize * 1.3) + "rem",
+              color: "black",
+              textAlign: "center",
+              padding: "0",
+              border: "0",
+              backgroundColor: "transparent",
+              fontWeight: "500",
             }}
           >
             {props.data.name}
@@ -39,6 +41,10 @@ export default function TagDetails(props) {
           <Card.Img
             className="tag-art right-art"
             src={props.data.imagePath === "" ? null : props.data.imagePath}
+            alt="null"
+            style={{
+              overflow: "hidden",
+            }}
           />
         </Card.Title>
         <Card.Text

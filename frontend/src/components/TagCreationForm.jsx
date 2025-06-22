@@ -55,14 +55,6 @@ export default function TagCreationForm(props) {
   //   setFormData(emptyFormData);
   // }
 
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-
-  function handleImageChange(e) {
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: URL.createObjectURL(file) });
-  }
   return (
     <Card
       style={{
@@ -150,4 +142,13 @@ export default function TagCreationForm(props) {
       </Card.Body>
     </Card>
   );
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: URL.createObjectURL(file) });
+  }
 }
