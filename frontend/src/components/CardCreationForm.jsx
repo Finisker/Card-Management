@@ -131,6 +131,7 @@ export default function CardCreationForm(props) {
               style={{
                 overflow: "hidden",
                 borderRadius: "50%",
+                cursor: "pointer",
               }}
             />
           </Form.Label>
