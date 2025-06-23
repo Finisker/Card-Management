@@ -42,7 +42,6 @@ export default function Display(props) {
         }),
       };
     });
-    console.log(mergedCards);
     return mergedCards;
   }, [props.query, cards, tags]);
 
