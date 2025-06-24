@@ -1,0 +1,137 @@
+.card-container {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    padding: 0;
+
+    align-items: center;
+
+    position: relative;
+    background-color: inherit;
+  }
+
+  .card-title {
+    position: relative;
+    height: 10%;
+    width: 100%;
+    top: 1%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 100%;
+  }
+
+  .cost {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 15%;
+    height: 100%;
+
+    border: 1px solid;
+    border-radius: 50%;
+  }
+
+  .manaCost {
+    left: 2%;
+    background-color: rgb(0, 0, 255, 0.5);
+  }
+
+  .goldCost {
+    right: 2%;
+    background-color: rgba(255, 255, 0, 0.4);
+  }
+
+  .title {
+    display: flex;
+
+    height: 100%;
+    width: 65%;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tag-title {
+    display: flex;
+
+    height: 100%;
+    width: 75%;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image {
+    position: relative;
+    height: 50%;
+    width: 75%;
+    border-radius: 50%;
+    border: 1px solid;
+  }
+
+  .description {
+    position: relative;
+    height: 40%;
+    width: 90%;
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: 85%;
+  }
+
+  .tags {
+    position: absolute;
+    right: 1%;
+    top: 12%;
+    width: 10%;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tag {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2px;
+  }
+
+  .card-title-tag {
+    display: flex;
+    height: 30%;
+
+    position: relative;
+    width: 100%;
+    top: 1%;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    font-size: 100%;
+
+    background-color: inherit;
+  }
+
+  .tag-art {
+    position: relative;
+    height: 75%;
+    width: 25%;
+  }
+
+  .right-art {
+    right: 3%;
+  }
+
+  .form-control.modal-form:focus {
+    box-shadow: none;
+  }
+}

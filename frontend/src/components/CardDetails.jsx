@@ -1,5 +1,5 @@
 import Card from "react-bootstrap/Card";
-import "../styles/Details.css";
+import "../styles/Details.scss";
 import Container from "react-bootstrap/esm/Container";
 
 export default function CardDetails(props) {
@@ -17,6 +17,7 @@ export default function CardDetails(props) {
 
   return (
     <Card
+      className="card-container"
       style={{
         width: size.width + "rem",
         height: size.height + "rem",

@@ -6,7 +6,7 @@ import Display from "./components/Display";
 import CreationModal from "./components/ModalFactory";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
-import "./styles/App.css";
+import "./styles/App.scss";
 
 export default function App() {
   const [query, setQuery] = useState(null);

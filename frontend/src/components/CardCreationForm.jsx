@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-import "../styles/Details.css";
+import "../styles/Details.scss";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -64,6 +64,7 @@ export default function CardCreationForm(props) {
   return (
     <>
       <Card
+        className="card-container"
         style={{
           width: size.width + "rem",
           height: size.height + "rem",

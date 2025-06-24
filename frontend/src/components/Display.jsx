@@ -8,7 +8,7 @@ import Button from "react-bootstrap/esm/Button";
 import CardDetails from "./CardDetails";
 import TagDetails from "./TagDetails";
 import CreationModal from "./ModalFactory";
-import "../styles/Display.css";
+import "../styles/Display.scss";
 import ModalFactory from "./ModalFactory";
 
 export default function Display(props) {
@@ -79,7 +79,7 @@ export default function Display(props) {
 
   return (
     <>
-      <Container className="d-flex flex-column">
+      <Container className="d-flex flex-column display-container">
         <Tabs defaultActiveKey="cards" transition={false}>
           <Tab
             eventKey="cards"

@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
-import "../styles/Details.css";
+import "../styles/Details.scss";
 
 import { useState } from "react";
 
@@ -57,6 +57,7 @@ export default function TagCreationForm(props) {
 
   return (
     <Card
+      className="card-container"
       style={{
         width: size.width + "rem",
         height: size.height + "rem",

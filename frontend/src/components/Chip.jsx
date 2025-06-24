@@ -1,5 +1,5 @@
 import { Children } from "react";
-import "../styles/Chip.css";
+import "../styles/Chip.scss";
 
 export default function Chip(props) {
   const children = Children.toArray(props.children);

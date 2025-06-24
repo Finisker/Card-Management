@@ -6,7 +6,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Chip from "./Chip";
 import { useEffect, useMemo, useState } from "react";
-import "../styles/SearchBar.css";
+import "../styles/SearchBar.scss";
 
 const testTags = ["Heal", "tag2", "tag3", "tag4", "tag5"];
 
