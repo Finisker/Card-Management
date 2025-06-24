@@ -37,6 +37,7 @@ export default function ModalFactory(props) {
           edit={edit}
           handleClose={props.handleClose}
           card={displayData}
+          tags={props.content.tags}
           bubbleData={bubbleData}
         />
       )}

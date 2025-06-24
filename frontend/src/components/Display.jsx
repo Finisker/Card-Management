@@ -32,9 +32,18 @@ export default function Display(props) {
         })
       : cardsByName;
 
-    console.log("Cards by tag", cardsByTags);
+    const mergedCards = cardsByTags.map((card) => {
+      return {
+        ...card,
+        tags: card.tags.map((cTag) => {
+          return tags.find((tTag) => {
+            return tTag.id === cTag.id;
+          });
+        }),
+      };
+    });
 
-    return cardsByTags;
+    return mergedCards;
   }, [props.query, cards, tags]);
 
   useEffect(() => {
@@ -213,6 +222,7 @@ export default function Display(props) {
     const newModalContent = {
       type: "card",
       data: newCard,
+      tags: tags,
       create: create,
     };
     setModalContent(newModalContent);
@@ -533,6 +543,20 @@ const testTags = [
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
     imagePath: "fire.png",
+  },
+  {
+    id: 3,
+    name: "Bunny",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "bunny.png",
+  },
+  {
+    id: 4,
+    name: "Pizza",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+    imagePath: "pizza.png",
   },
 ];
 

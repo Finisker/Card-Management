@@ -13,7 +13,6 @@ import { useState } from "react";
 
 export default function CardCreationForm(props) {
   const [formData, setFormData] = useState(props.data);
-  // const [showModal, setShowModal] = useState(false);
 
   const size = {
     width: props.size,
@@ -197,7 +196,7 @@ export default function CardCreationForm(props) {
                 <Popover.Header as="h3">Edit tags</Popover.Header>
                 <Popover.Body>
                   {formData.tags &&
-                    formData.tags.map((tag, index) => {
+                    formData.tags.map((formTag, index) => {
                       return (
                         <Dropdown
                           key={index}
@@ -214,18 +213,30 @@ export default function CardCreationForm(props) {
                               color: "black",
                             }}
                           >
-                            {tag.name}
+                            {formTag.name}
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu>
-                            {formData.tags &&
-                              formData.tags.map((tag, index) => {
-                                return (
-                                  <Dropdown.Item key={index}>
-                                    {tag.name}
-                                  </Dropdown.Item>
-                                );
-                              })}
+                            {props.tags &&
+                              props.tags
+                                .filter(
+                                  (tag) =>
+                                    !formData.tags
+                                      .map((tag) => tag.id)
+                                      .includes(tag.id)
+                                )
+                                .map((tag, index) => {
+                                  return (
+                                    <Dropdown.Item
+                                      key={index}
+                                      onClick={() =>
+                                        handleTagDropdownItemClick(formTag, tag)
+                                      }
+                                    >
+                                      {tag.name}
+                                    </Dropdown.Item>
+                                  );
+                                })}
                           </Dropdown.Menu>
                         </Dropdown>
                       );
@@ -248,7 +259,6 @@ export default function CardCreationForm(props) {
                     />
                   );
                 })}
-              {/* </Form.Label> */}
             </Container>
           </OverlayTrigger>
         </Card.Body>
@@ -282,8 +292,11 @@ export default function CardCreationForm(props) {
     setFormData({ ...formData, image: URL.createObjectURL(file) });
   }
 
-  // function handleTagsClick() {
-  //   console.log("Hi");
-  //   setShowModal(true);
-  // }
+  function handleTagDropdownItemClick(oldTag, newTag) {
+    console.log(oldTag);
+    console.log(newTag);
+    const newTags = formData.tags.filter((tag) => tag.id != oldTag.id);
+
+    setFormData({ ...formData, tags: [...newTags, newTag] });
+  }
 }

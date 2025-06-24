@@ -16,7 +16,12 @@ export default function CardModal(props) {
     >
       {!props.edit && <CardDetails data={props.card} size={22} />}
       {props.edit && (
-        <CardCreationForm data={props.card} size={22} bubbleData={bubbleData} />
+        <CardCreationForm
+          data={props.card}
+          tags={props.tags}
+          size={22}
+          bubbleData={bubbleData}
+        />
       )}
     </Modal.Body>
   );
