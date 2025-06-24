@@ -14,7 +14,6 @@ export default function CardDetails(props) {
     description:
       (size.fontSize / Math.sqrt(props.data.description.length)) * 6.8,
   };
-
   return (
     <Card
       className="card-container"
@@ -50,11 +49,13 @@ export default function CardDetails(props) {
         </Card.Text>
         <Container className="tags">
           {props.data.tags &&
-            props.data.tags.map((tag, index) => {
-              return (
-                <Card.Img key={index} className="tag" src={tag.imagePath} />
-              );
-            })}
+            props.data.tags
+              .toSorted((tag1, tag2) => tag1.display - tag2.display)
+              .map((tag, index) => {
+                return (
+                  <Card.Img key={index} className="tag" src={tag.imagePath} />
+                );
+              })}
         </Container>
       </Card.Body>
     </Card>

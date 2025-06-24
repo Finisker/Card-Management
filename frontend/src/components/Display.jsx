@@ -36,9 +36,12 @@ export default function Display(props) {
       return {
         ...card,
         tags: card.tags.map((cTag) => {
-          return tags.find((tTag) => {
-            return tTag.id === cTag.id;
-          });
+          return {
+            ...tags.find((tTag) => {
+              return tTag.id === cTag.id;
+            }),
+            display: cTag.display,
+          };
         }),
       };
     });
@@ -213,12 +216,6 @@ export default function Display(props) {
       newCard.id = maxId(cards) + 1;
     }
 
-    newCard.tags = card.tags.map((cTag) => {
-      return tags.find((tTag) => {
-        return tTag.id === cTag.id;
-      });
-    });
-
     const newModalContent = {
       type: "card",
       data: newCard,
@@ -318,6 +315,7 @@ const testCards = [
     tags: [
       {
         id: 1,
+        display: 1,
       },
     ],
   },
@@ -334,15 +332,17 @@ const testCards = [
     tags: [
       {
         id: 1,
+        display: 2,
       },
       {
         id: 2,
+        display: 1,
       },
     ],
   },
   {
     id: 3,
-    name: "Burning Strike2",
+    name: "Heal",
     type: "postman_type",
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
@@ -352,16 +352,14 @@ const testCards = [
 
     tags: [
       {
-        id: 1,
-      },
-      {
-        id: 1,
+        id: 2,
+        display: 1,
       },
     ],
   },
   {
     id: 4,
-    name: "Burning Strike2",
+    name: "Bunny",
     type: "postman_type",
     description:
       "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
@@ -371,159 +369,8 @@ const testCards = [
 
     tags: [
       {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ],
-  },
-  {
-    id: 5,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ],
-  },
-  {
-    id: 6,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ],
-  },
-  {
-    id: 7,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ],
-  },
-  {
-    id: 8,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ],
-  },
-  {
-    id: 9,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ],
-  },
-  {
-    id: 10,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-      },
-      {
-        id: 1,
-      },
-    ],
-  },
-  {
-    id: 11,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 1,
-      },
-      {
-        id: 2,
-      },
-    ],
-  },
-  {
-    id: 11,
-    name: "Burning Strike2",
-    type: "postman_type",
-    description:
-      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
-
-    manaCost: "14",
-    goldCost: "12",
-
-    tags: [
-      {
-        id: 2,
+        id: 3,
+        display: 1,
       },
     ],
   },

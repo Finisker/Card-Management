@@ -25,7 +25,6 @@ export default function CardCreationForm(props) {
     manaCost: (size.fontSize / formData.manaCost.length) * 1.3,
     goldCost: (size.fontSize / formData.goldCost.length) * 1.3,
   };
-
   useEffect(() => {
     props.bubbleData(formData);
   }, [formData, props]);
@@ -196,69 +195,79 @@ export default function CardCreationForm(props) {
                 <Popover.Header as="h3">Edit tags</Popover.Header>
                 <Popover.Body>
                   {formData.tags &&
-                    formData.tags.map((formTag, index) => {
-                      return (
-                        <Dropdown
-                          key={index}
-                          drop="end"
-                          style={{
-                            width: "100%",
-                          }}
-                        >
-                          <Dropdown.Toggle
-                            variant="secondary"
-                            id="dropdown-basic"
+                    formData.tags
+                      .toSorted((tag1, tag2) => tag1.display - tag2.display)
+                      .map((formTag, index) => {
+                        return (
+                          <Dropdown
+                            key={index}
+                            drop="end"
                             style={{
                               width: "100%",
-                              color: "black",
                             }}
                           >
-                            {formTag.name}
-                          </Dropdown.Toggle>
+                            <Dropdown.Toggle
+                              variant="secondary"
+                              id="dropdown-basic"
+                              style={{
+                                width: "100%",
+                                color: "black",
+                              }}
+                            >
+                              {formTag.name}
+                            </Dropdown.Toggle>
 
-                          <Dropdown.Menu>
-                            {props.tags &&
-                              props.tags
-                                .filter(
-                                  (tag) =>
-                                    !formData.tags
-                                      .map((tag) => tag.id)
-                                      .includes(tag.id)
-                                )
-                                .map((tag, index) => {
-                                  return (
-                                    <Dropdown.Item
-                                      key={index}
-                                      onClick={() =>
-                                        handleTagDropdownItemClick(formTag, tag)
-                                      }
-                                    >
-                                      {tag.name}
-                                    </Dropdown.Item>
-                                  );
-                                })}
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      );
-                    })}
+                            <Dropdown.Menu>
+                              {props.tags &&
+                                props.tags
+                                  .filter(
+                                    (tag) =>
+                                      !formData.tags
+                                        .map((tag) => tag.id)
+                                        .includes(tag.id)
+                                  )
+                                  .toSorted(
+                                    (tag1, tag2) => tag1.display - tag2.display
+                                  )
+                                  .map((tag, index) => {
+                                    return (
+                                      <Dropdown.Item
+                                        key={index}
+                                        onClick={() =>
+                                          handleTagDropdownItemClick(
+                                            formTag,
+                                            tag
+                                          )
+                                        }
+                                      >
+                                        {tag.name}
+                                      </Dropdown.Item>
+                                    );
+                                  })}
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        );
+                      })}
                 </Popover.Body>
               </Popover>
             }
           >
             <Container className="tags">
               {formData.tags &&
-                formData.tags.map((tag, index) => {
-                  return (
-                    <Card.Img
-                      key={index}
-                      className="tag popover-toggle"
-                      src={tag.imagePath}
-                      style={{
-                        cursor: "pointer",
-                      }}
-                    />
-                  );
-                })}
+                formData.tags
+                  .toSorted((tag1, tag2) => tag1.display - tag2.display)
+                  .map((tag, index) => {
+                    return (
+                      <Card.Img
+                        key={index}
+                        className="tag popover-toggle"
+                        src={tag.imagePath}
+                        style={{
+                          cursor: "pointer",
+                        }}
+                      />
+                    );
+                  })}
             </Container>
           </OverlayTrigger>
         </Card.Body>
@@ -295,6 +304,7 @@ export default function CardCreationForm(props) {
   function handleTagDropdownItemClick(oldTag, newTag) {
     console.log(oldTag);
     console.log(newTag);
+    newTag.display = oldTag.display;
     const newTags = formData.tags.filter((tag) => tag.id != oldTag.id);
 
     setFormData({ ...formData, tags: [...newTags, newTag] });

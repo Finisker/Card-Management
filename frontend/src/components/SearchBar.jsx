@@ -17,6 +17,14 @@ const testTags = [
     id: 2,
     name: "Burn motherf***er",
   },
+  {
+    id: 3,
+    name: "Bunny",
+  },
+  {
+    id: 4,
+    name: "Pizza",
+  },
 ];
 
 export default function SearchBar(props) {
