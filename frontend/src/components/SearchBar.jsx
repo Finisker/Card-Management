@@ -8,7 +8,16 @@ import Chip from "./Chip";
 import { useEffect, useMemo, useState } from "react";
 import "../styles/SearchBar.scss";
 
-const testTags = ["Heal", "tag2", "tag3", "tag4", "tag5"];
+const testTags = [
+  {
+    id: 1,
+    name: "Heal Scruvy",
+  },
+  {
+    id: 2,
+    name: "Burn motherf***er",
+  },
+];
 
 export default function SearchBar(props) {
   const [activeTags, setActiveTags] = useState([]);
@@ -17,12 +26,8 @@ export default function SearchBar(props) {
 
   const dropdownTags = useMemo(() => {
     return testTags
-      .filter((tag) => {
-        return tag.includes(tagInput);
-      })
-      .filter((tag) => {
-        return !activeTags.includes(tag);
-      });
+      .filter((tag) => tag.name.includes(tagInput))
+      .filter((tag) => !activeTags.map((aTag) => aTag.name).includes(tag.name));
   }, [activeTags, tagInput]);
 
   const { search } = props;
@@ -30,7 +35,9 @@ export default function SearchBar(props) {
   useEffect(() => {
     const query = {
       cardName: cardInput,
-      tags: activeTags,
+      tags: activeTags.map((tag) => {
+        return { id: tag.id };
+      }),
     };
     setTagInput("");
     search(query);
@@ -75,12 +82,12 @@ export default function SearchBar(props) {
                   return (
                     <Dropdown.Item
                       key={index}
-                      onClick={(e) => handleDropDownItemClick(e)}
+                      onClick={() => handleDropDownItemClick(tag)}
                       style={{
                         color: "white",
                       }}
                     >
-                      {tag}
+                      {tag.name}
                     </Dropdown.Item>
                   );
                 })}
@@ -93,8 +100,8 @@ export default function SearchBar(props) {
           {activeTags &&
             activeTags.map((tag, index) => {
               return (
-                <Chip key={index} onClick={handleOnClick}>
-                  {tag}
+                <Chip key={index} onClick={() => handleOnClick(tag)}>
+                  {tag.name}
                 </Chip>
               );
             })}
@@ -103,12 +110,11 @@ export default function SearchBar(props) {
     </div>
   );
 
-  function handleOnClick(e) {
-    const tag = e.target.innerText;
-    setActiveTags(activeTags.filter((ele) => ele != tag));
+  function handleOnClick(tag) {
+    setActiveTags(activeTags.filter((ele) => ele.id != tag.id));
   }
 
-  function handleDropDownItemClick(e) {
-    setActiveTags((prev) => [...prev, e.target.innerText]);
+  function handleDropDownItemClick(tag) {
+    setActiveTags((prev) => [...prev, tag]);
   }
 }

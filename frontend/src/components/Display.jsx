@@ -26,23 +26,15 @@ export default function Display(props) {
 
     const cardsByTags = props.query.tags.length
       ? cardsByName.filter((card) => {
-          return props.query.tags.every((tag) => {
-            return card.tags.map((tag) => tag.name).includes(tag);
+          return props.query.tags.every((qTag) => {
+            return card.tags.map((cTag) => cTag.id).includes(qTag.id);
           });
         })
       : cardsByName;
 
-    const mergedCards = cardsByTags.map((card) => {
-      return {
-        ...card,
-        tags: card.tags.map((cTag) => {
-          return tags.find((tTag) => {
-            return tTag.id === cTag.id;
-          });
-        }),
-      };
-    });
-    return mergedCards;
+    console.log("Cards by tag", cardsByTags);
+
+    return cardsByTags;
   }, [props.query, cards, tags]);
 
   useEffect(() => {
@@ -316,7 +308,6 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -333,11 +324,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 2,
-        name: "Heal2",
       },
     ],
   },
@@ -354,11 +343,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -375,11 +362,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -396,11 +381,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -417,11 +400,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -438,11 +419,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -459,11 +438,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -480,11 +457,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -501,11 +476,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 1,
-        name: "Heal2",
       },
     ],
   },
@@ -522,11 +495,25 @@ const testCards = [
     tags: [
       {
         id: 1,
-        name: "Heal",
       },
       {
         id: 2,
-        name: "Heal2",
+      },
+    ],
+  },
+  {
+    id: 11,
+    name: "Burning Strike2",
+    type: "postman_type",
+    description:
+      "Pellentesque vitae enim vel elit facilisis egestas vitae vitae est.",
+
+    manaCost: "14",
+    goldCost: "12",
+
+    tags: [
+      {
+        id: 2,
       },
     ],
   },
