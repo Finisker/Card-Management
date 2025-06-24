@@ -56,7 +56,7 @@ export default function SearchBar(props) {
           </FloatingLabel>
         </Col>
         <Col xs={2}>
-          <DropdownButton id="dropdown-basic" drop="end" title="Tags">
+          <DropdownButton id="dropdown-button" drop="end" title="Tags">
             <Form.Control
               type="tags"
               placeholder=""
