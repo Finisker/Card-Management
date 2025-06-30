@@ -40,7 +40,6 @@ export default function Display(props) {
             ...tags.find((tTag) => {
               return tTag.id === cTag.id;
             }),
-            display: cTag.display,
           };
         }),
       };
@@ -241,19 +240,15 @@ export default function Display(props) {
   }
 
   function saveData(data, type) {
-    let newData;
-
     switch (type) {
       case "card":
-        newData = cards.filter((card) => card.id !== data.id);
         console.log("Saving a card", data);
-        setCards([...newData, data]);
+        setCards((prev) => prev.map((c) => (c.id == data.id ? data : c)));
         return;
 
       case "tag":
-        newData = tags.filter((tag) => tag.id !== data.id);
         console.log("Saving a tag", data);
-        setTags([...newData, data]);
+        setTags((prev) => prev.map((t) => (t.id == data.id ? data : t)));
         return;
 
       default:
@@ -261,6 +256,23 @@ export default function Display(props) {
           "Pass a type to the 'saveData' funtion in 'Display' component"
         );
         return;
+    }
+  }
+
+  function handleDelete(id, type) {
+    const confirmed = window.confirm("Are you sure you want to delete?");
+    if (confirmed) {
+      setShowModal(false);
+      switch (type) {
+        case "card":
+          setCards(cards.filter((card) => card.id !== id));
+          return;
+        case "tag":
+          setTags(tags.filter((tag) => tag.id !== id));
+          return;
+        default:
+          return;
+      }
     }
   }
 
@@ -274,30 +286,10 @@ export default function Display(props) {
     }
 
     const max = collection.reduce((prev, current) =>
-      prev && prev.id > current.id ? prev : current
+      prev.id > current.id ? prev : current
     );
 
     return max.id;
-  }
-
-  function handleDelete(id, type) {
-    const confirmed = window.confirm("Are you sure you want to delete?");
-    if (confirmed) {
-      let newData = [];
-      setShowModal(false);
-      switch (type) {
-        case "card":
-          newData = cards.filter((card) => card.id !== id);
-          setCards(newData);
-          return;
-        case "tag":
-          newData = tags.filter((tag) => tag.id !== id);
-          setTags(newData);
-          return;
-        default:
-          return;
-      }
-    }
   }
 }
 
@@ -315,7 +307,6 @@ const testCards = [
     tags: [
       {
         id: 1,
-        display: 1,
       },
     ],
   },
@@ -332,11 +323,9 @@ const testCards = [
     tags: [
       {
         id: 1,
-        display: 2,
       },
       {
         id: 2,
-        display: 1,
       },
     ],
   },
@@ -353,7 +342,6 @@ const testCards = [
     tags: [
       {
         id: 2,
-        display: 1,
       },
     ],
   },
@@ -370,7 +358,6 @@ const testCards = [
     tags: [
       {
         id: 3,
-        display: 1,
       },
     ],
   },

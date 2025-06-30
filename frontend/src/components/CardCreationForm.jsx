@@ -60,253 +60,226 @@ export default function CardCreationForm(props) {
   // }
 
   return (
-    <>
-      <Card
-        className="card-container"
-        style={{
-          width: size.width + "rem",
-          height: size.height + "rem",
-          fontSize: size.fontSize + "rem",
-          backgroundColor: "inherit",
-        }}
-      >
-        <Card.Body className="card-body">
-          <Card.Title className="card-title">
-            <Form.Group
-              className="title"
-              controlId="cardForm.ControlInput1"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                width: "100%",
-              }}
-            >
-              <Form.Control
-                className="modal-form cost manaCost"
-                name="manaCost"
-                placeholder="0"
-                onChange={(e) => handleChange(e)}
-                value={formData.manaCost}
-                style={{
-                  color: "black",
-                  fontSize: Math.min(size.fontSize, fontSize.manaCost) + "rem",
-                  width: size.width / 6.7 + "rem",
-                  textAlign: "center",
-                  fontWeight: "500",
-                }}
-              />
-              <Form.Control
-                className="modal-form"
-                name="name"
-                placeholder="Title"
-                onChange={(e) => handleChange(e)}
-                value={formData.name}
-                style={{
-                  fontSize:
-                    Math.min(fontSize.title, size.fontSize * 1.3) + "rem",
-                  color: "black",
-                  textAlign: "center",
-                  padding: "0",
-                  border: "0",
-                  backgroundColor: "transparent",
-                  fontWeight: "500",
-                }}
-              />
-              <Form.Control
-                className="modal-form cost goldCost"
-                name="goldCost"
-                placeholder="0"
-                onChange={(e) => handleChange(e)}
-                value={formData.goldCost}
-                style={{
-                  color: "black",
-                  fontSize: Math.min(size.fontSize, fontSize.goldCost) + "rem",
-                  width: size.width / 6.7 + "rem",
-                  textAlign: "center",
-                  fontWeight: "500",
-                }}
-              />
-            </Form.Group>
-          </Card.Title>
+    <Card
+      className="card-container"
+      style={{
+        width: size.width + "rem",
+        height: size.height + "rem",
+        fontSize: size.fontSize + "rem",
+        backgroundColor: "inherit",
+      }}
+    >
+      <Card.Body className="card-body">
+        <Card.Title className="card-title">
           <Form.Group
-            className="image"
-            controlId="imageInput"
-            name="image"
-            onChange={(e) => handleImageChange(e)}
+            className="title"
+            controlId="cardForm.ControlInput1"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+            }}
           >
-            <Form.Label className="w-100 h-100 d-flex align-content-center">
-              <Card.Img
-                src={formData.image}
-                style={{
-                  overflow: "hidden",
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                }}
-              />
-            </Form.Label>
             <Form.Control
-              type="file"
+              className="modal-form cost manaCost"
+              name="manaCost"
+              placeholder="0"
+              onChange={(e) => handleChange(e)}
+              value={formData.manaCost}
               style={{
-                display: "none",
+                color: "black",
+                fontSize: Math.min(size.fontSize, fontSize.manaCost) + "rem",
+                width: size.width / 6.7 + "rem",
+                textAlign: "center",
+                fontWeight: "500",
               }}
             />
-          </Form.Group>
-          <Form.Group
-            className="description"
-            controlId="cardForm.ControlTextarea1"
-          >
             <Form.Control
               className="modal-form"
-              name="description"
-              as="textarea"
-              placeholder="Description"
-              rows={3}
+              name="name"
+              placeholder="Title"
               onChange={(e) => handleChange(e)}
-              value={formData.description}
+              value={formData.name}
               style={{
-                fontSize:
-                  Math.min(fontSize.description, size.fontSize * 0.85) + "rem",
+                fontSize: Math.min(fontSize.title, size.fontSize * 1.3) + "rem",
                 color: "black",
+                textAlign: "center",
                 padding: "0",
                 border: "0",
                 backgroundColor: "transparent",
-                overflow: "hidden",
-                resize: "none",
-                height: size.height * 3 + "%",
-                textAlign: "justify",
-                textJustify: "inter-word",
+                fontWeight: "500",
+              }}
+            />
+            <Form.Control
+              className="modal-form cost goldCost"
+              name="goldCost"
+              placeholder="0"
+              onChange={(e) => handleChange(e)}
+              value={formData.goldCost}
+              style={{
+                color: "black",
+                fontSize: Math.min(size.fontSize, fontSize.goldCost) + "rem",
+                width: size.width / 6.7 + "rem",
+                textAlign: "center",
+                fontWeight: "500",
               }}
             />
           </Form.Group>
-          {/* <Form.Label
+        </Card.Title>
+        <Form.Group
+          className="image"
+          controlId="imageInput"
+          name="image"
+          onChange={(e) => handleImageChange(e)}
+        >
+          <Form.Label className="w-100 h-100 d-flex align-content-center">
+            <Card.Img
+              src={formData.image}
+              style={{
+                overflow: "hidden",
+                borderRadius: "50%",
+                cursor: "pointer",
+              }}
+            />
+          </Form.Label>
+          <Form.Control
+            type="file"
+            style={{
+              display: "none",
+            }}
+          />
+        </Form.Group>
+        <Form.Group
+          className="description"
+          controlId="cardForm.ControlTextarea1"
+        >
+          <Form.Control
+            className="modal-form"
+            name="description"
+            as="textarea"
+            placeholder="Description"
+            rows={3}
+            onChange={(e) => handleChange(e)}
+            value={formData.description}
+            style={{
+              fontSize:
+                Math.min(fontSize.description, size.fontSize * 0.85) + "rem",
+              color: "black",
+              padding: "0",
+              border: "0",
+              backgroundColor: "transparent",
+              overflow: "hidden",
+              resize: "none",
+              height: size.height * 3 + "%",
+              textAlign: "justify",
+              textJustify: "inter-word",
+            }}
+          />
+        </Form.Group>
+        {/* <Form.Label
             className="d-flex align-content-center tags"
             onClick={() => handleTagsClick()}
             style={{
               cursor: "pointer",
             }}
           > */}
-          <OverlayTrigger
-            trigger="click"
-            placement="right"
-            container={document.body}
-            rootClose={false}
-            overlay={
-              <Popover id="popover-basic">
-                <Popover.Header as="h3">Edit tags</Popover.Header>
-                <Popover.Body>
-                  {formData.tags &&
-                    formData.tags
-                      .toSorted((tag1, tag2) => tag1.display - tag2.display)
-                      .map((formTag, index) => {
-                        return (
-                          <Dropdown
-                            key={index}
-                            drop="end"
-                            style={{
-                              width: "100%",
-                            }}
-                          >
-                            <Dropdown.Toggle
-                              variant="secondary"
-                              id="dropdown-basic"
-                              style={{
-                                width: "100%",
-                                color: "black",
-                              }}
-                            >
-                              {formTag.name}
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                              {props.tags &&
-                                props.tags
-                                  .filter(
-                                    (tag) =>
-                                      !formData.tags
-                                        .map((tag) => tag.id)
-                                        .includes(tag.id)
-                                  )
-                                  .toSorted(
-                                    (tag1, tag2) => tag1.display - tag2.display
-                                  )
-                                  .map((tag, index) => {
-                                    return (
-                                      <Dropdown.Item
-                                        key={index}
-                                        onClick={() =>
-                                          handleTagDropdownItemClick(
-                                            formTag,
-                                            tag
-                                          )
-                                        }
-                                      >
-                                        {tag.name}
-                                      </Dropdown.Item>
-                                    );
-                                  })}
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        );
-                      })}
-                </Popover.Body>
-              </Popover>
-            }
-          >
-            <Container className="tags">
-              {formData.tags &&
-                formData.tags
-                  .toSorted((tag1, tag2) => tag1.display - tag2.display)
-                  .map((tag, index) => {
+        <OverlayTrigger
+          trigger="click"
+          placement="right"
+          container={document.body}
+          rootClose={false}
+          overlay={
+            <Popover id="popover-basic">
+              <Popover.Header as="h3">Edit tags</Popover.Header>
+              <Popover.Body>
+                {formData.tags &&
+                  formData.tags.map((formTag, index) => {
                     return (
-                      <Card.Img
+                      <Dropdown
                         key={index}
-                        className="tag popover-toggle"
-                        src={tag.imagePath}
+                        drop="end"
                         style={{
-                          cursor: "pointer",
+                          width: "100%",
                         }}
-                      />
+                      >
+                        <Dropdown.Toggle
+                          variant="secondary"
+                          id="dropdown-basic"
+                          style={{
+                            width: "100%",
+                            color: "black",
+                          }}
+                        >
+                          {formTag.name}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                          {props.tags &&
+                            props.tags
+                              .filter(
+                                (tag) =>
+                                  !formData.tags
+                                    .map((tag) => tag.id)
+                                    .includes(tag.id)
+                              )
+                              .map((tag, index) => {
+                                return (
+                                  <Dropdown.Item
+                                    key={index}
+                                    onClick={() =>
+                                      handleTagDropdownItemClick(formTag, tag)
+                                    }
+                                  >
+                                    {tag.name}
+                                  </Dropdown.Item>
+                                );
+                              })}
+                        </Dropdown.Menu>
+                      </Dropdown>
                     );
                   })}
-            </Container>
-          </OverlayTrigger>
-        </Card.Body>
-      </Card>
-      {/* <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        // backdrop="static"
-        // keyboard={false}
-        centered
-        style={{
-          top: size.height,
-        }}
-      >
-        <Modal.Body
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        ></Modal.Body>
-      </Modal> */}
-    </>
+              </Popover.Body>
+            </Popover>
+          }
+        >
+          <Container className="tags">
+            {formData.tags &&
+              formData.tags.map((tag, index) => {
+                return (
+                  <Card.Img
+                    key={index}
+                    className="tag popover-toggle"
+                    src={tag.imagePath}
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  />
+                );
+              })}
+          </Container>
+        </OverlayTrigger>
+      </Card.Body>
+    </Card>
   );
 
   function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
   }
 
   function handleImageChange(e) {
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: URL.createObjectURL(file) });
+    setFormData((prev) => {
+      return { ...prev, image: URL.createObjectURL(e.target.files[0]) };
+    });
   }
 
   function handleTagDropdownItemClick(oldTag, newTag) {
-    console.log(oldTag);
-    console.log(newTag);
-    newTag.display = oldTag.display;
-    const newTags = formData.tags.filter((tag) => tag.id != oldTag.id);
-
-    setFormData({ ...formData, tags: [...newTags, newTag] });
+    setFormData((prev) => {
+      return {
+        ...prev,
+        tags: prev.tags.map((t) => (t.id == oldTag.id ? newTag : t)),
+      };
+    });
   }
 }
