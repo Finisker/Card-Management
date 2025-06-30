@@ -297,7 +297,7 @@ export default function CardCreationForm(props) {
                   />
                 );
               })}
-            {formData.tags && formData.tags.length == 0 && (
+            {formData.tags && (
               <Card.Img
                 className="tag popover-toggle"
                 src="plus.png"
