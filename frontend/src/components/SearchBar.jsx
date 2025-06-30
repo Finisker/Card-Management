@@ -16,7 +16,7 @@ export default function SearchBar(props) {
   const dropdownTags = useMemo(() => {
     return props.tags
       .filter((tag) => tag.name.includes(tagInput))
-      .filter((tag) => !activeTags.map((aTag) => aTag.name).includes(tag.name));
+      .filter((tag) => !activeTags.includes(tag.id));
   }, [activeTags, tagInput, props.tags]);
 
   const { search } = props;
@@ -25,7 +25,7 @@ export default function SearchBar(props) {
     const query = {
       cardName: cardInput,
       tags: activeTags.map((tag) => {
-        return { id: tag.id };
+        return { id: tag };
       }),
     };
     setTagInput("");
@@ -87,23 +87,26 @@ export default function SearchBar(props) {
       <Row className="mt-3">
         <Col className="d-flex align-items-start justify-content-start gap-3 mb-3 flex-wrap">
           {activeTags &&
-            activeTags.map((tag, index) => {
-              return (
-                <Chip key={index} onClick={() => handleOnClick(tag)}>
-                  {tag.name}
-                </Chip>
-              );
-            })}
+            props.tags &&
+            props.tags
+              .filter((t) => activeTags.includes(t.id))
+              .map((tag, index) => {
+                return (
+                  <Chip key={index} onClick={() => handleOnClick(tag)}>
+                    {tag.name}
+                  </Chip>
+                );
+              })}
         </Col>
       </Row>
     </div>
   );
 
   function handleOnClick(tag) {
-    setActiveTags(activeTags.filter((ele) => ele.id != tag.id));
+    setActiveTags(activeTags.filter((ele) => ele != tag.id));
   }
 
   function handleDropDownItemClick(tag) {
-    setActiveTags((prev) => [...prev, tag]);
+    setActiveTags((prev) => [...prev, tag.id]);
   }
 }
