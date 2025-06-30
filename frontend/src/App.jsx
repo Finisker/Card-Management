@@ -16,13 +16,13 @@ export default function App() {
     setQuery(query);
   }, []);
 
-  function bubbleTags(tags) {
+  const bubbleTags = useCallback((tags) => {
     setTags(
       tags.map((t) => {
         return { id: t.id, name: t.name };
       })
     );
-  }
+  }, []);
 
   return (
     <div className="app-container container-fluid h-100">

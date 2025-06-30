@@ -53,9 +53,11 @@ export default function Display(props) {
     setCards(testCards);
   }, []);
 
+  const { bubbleTags } = props;
+
   useEffect(() => {
-    props.bubbleTags(tags);
-  }, [props, tags]);
+    bubbleTags(tags);
+  }, [bubbleTags, tags]);
 
   // useEffect(() => {
   //   fetch("http://localhost:8080/cards/all")
