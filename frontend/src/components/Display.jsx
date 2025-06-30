@@ -243,12 +243,20 @@ export default function Display(props) {
     switch (type) {
       case "card":
         console.log("Saving a card", data);
-        setCards((prev) => prev.map((c) => (c.id == data.id ? data : c)));
+        if (cards.findIndex((c) => c.id == data.id) == -1) {
+          setCards((prev) => [...prev, data]);
+        } else {
+          setCards((prev) => prev.map((c) => (c.id == data.id ? data : c)));
+        }
         return;
 
       case "tag":
         console.log("Saving a tag", data);
-        setTags((prev) => prev.map((t) => (t.id == data.id ? data : t)));
+        if (tags.findIndex((t) => t.id == data.id) == -1) {
+          setTags((prev) => [...prev, data]);
+        } else {
+          setTags((prev) => prev.map((t) => (t.id == data.id ? data : t)));
+        }
         return;
 
       default:
