@@ -13,6 +13,12 @@ export default function SearchBar(props) {
   const [tagInput, setTagInput] = useState("");
   const [cardInput, setCardInput] = useState("");
 
+  useEffect(() => {
+    setActiveTags((prev) =>
+      prev.filter((p) => props.tags.map((t) => t.id).includes(p))
+    );
+  }, [props.tags]);
+
   const dropdownTags = useMemo(() => {
     return props.tags
       .filter((tag) => tag.name.includes(tagInput))
