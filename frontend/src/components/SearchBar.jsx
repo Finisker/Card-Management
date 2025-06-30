@@ -8,35 +8,16 @@ import Chip from "./Chip";
 import { useEffect, useMemo, useState } from "react";
 import "../styles/SearchBar.scss";
 
-const testTags = [
-  {
-    id: 1,
-    name: "Heal Scruvy",
-  },
-  {
-    id: 2,
-    name: "Burn motherf***er",
-  },
-  {
-    id: 3,
-    name: "Bunny",
-  },
-  {
-    id: 4,
-    name: "Pizza",
-  },
-];
-
 export default function SearchBar(props) {
   const [activeTags, setActiveTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
   const [cardInput, setCardInput] = useState("");
 
   const dropdownTags = useMemo(() => {
-    return testTags
+    return props.tags
       .filter((tag) => tag.name.includes(tagInput))
       .filter((tag) => !activeTags.map((aTag) => aTag.name).includes(tag.name));
-  }, [activeTags, tagInput]);
+  }, [activeTags, tagInput, props.tags]);
 
   const { search } = props;
 

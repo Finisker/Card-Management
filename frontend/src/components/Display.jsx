@@ -53,6 +53,10 @@ export default function Display(props) {
     setCards(testCards);
   }, []);
 
+  useEffect(() => {
+    props.bubbleTags(tags);
+  }, [props, tags]);
+
   // useEffect(() => {
   //   fetch("http://localhost:8080/cards/all")
   //     .then((res) => {

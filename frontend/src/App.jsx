@@ -10,18 +10,27 @@ import "./styles/App.scss";
 
 export default function App() {
   const [query, setQuery] = useState(null);
+  const [tags, setTags] = useState([]);
 
   const search = useCallback((query) => {
     setQuery(query);
   }, []);
 
+  function bubbleTags(tags) {
+    setTags(
+      tags.map((t) => {
+        return { id: t.id, name: t.name };
+      })
+    );
+  }
+
   return (
     <div className="app-container container-fluid h-100">
       <div className="searchbar-container">
-        <SearchBar search={search} />
+        <SearchBar search={search} tags={tags} />
       </div>
       <div className="cardsdisplay-container">
-        <Display query={query} />
+        <Display query={query} bubbleTags={bubbleTags} />
       </div>
     </div>
   );
