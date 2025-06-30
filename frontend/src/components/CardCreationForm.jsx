@@ -234,10 +234,51 @@ export default function CardCreationForm(props) {
                                   </Dropdown.Item>
                                 );
                               })}
+                          <Dropdown.Item
+                            onClick={() => handleTagRemove(formTag)}
+                          >
+                            Remove Tag
+                          </Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     );
                   })}
+                <Dropdown
+                  drop="end"
+                  style={{
+                    width: "100%",
+                  }}
+                >
+                  <Dropdown.Toggle
+                    variant="secondary"
+                    id="dropdown-basic"
+                    style={{
+                      width: "100%",
+                      color: "black",
+                    }}
+                  >
+                    Add tag
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {props.tags &&
+                      props.tags
+                        .filter(
+                          (tag) =>
+                            !formData.tags.map((tag) => tag.id).includes(tag.id)
+                        )
+                        .map((tag, index) => {
+                          return (
+                            <Dropdown.Item
+                              key={index}
+                              onClick={() => handleAddNewTag(tag)}
+                            >
+                              {tag.name}
+                            </Dropdown.Item>
+                          );
+                        })}
+                  </Dropdown.Menu>
+                </Dropdown>
               </Popover.Body>
             </Popover>
           }
@@ -256,6 +297,15 @@ export default function CardCreationForm(props) {
                   />
                 );
               })}
+            {formData.tags && formData.tags.length == 0 && (
+              <Card.Img
+                className="tag popover-toggle"
+                src="plus.png"
+                style={{
+                  cursor: "pointer",
+                }}
+              />
+            )}
           </Container>
         </OverlayTrigger>
       </Card.Body>
@@ -280,6 +330,18 @@ export default function CardCreationForm(props) {
         ...prev,
         tags: prev.tags.map((t) => (t.id == oldTag.id ? newTag : t)),
       };
+    });
+  }
+
+  function handleAddNewTag(tag) {
+    setFormData((prev) => {
+      return { ...prev, tags: [...prev.tags, tag] };
+    });
+  }
+
+  function handleTagRemove(tag) {
+    setFormData((prev) => {
+      return { ...prev, tags: prev.tags.filter((t) => t.id != tag.id) };
     });
   }
 }
