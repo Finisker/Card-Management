@@ -92,7 +92,7 @@ export default function Display(props) {
               backgroundColor: "rgba(0,0,0,0.5)",
             }}
           >
-            <Container className="d-flex gap-3 flex-wrap justify-content-between">
+            <Container className="d-flex gap-3 flex-wrap justify-content-start">
               <div
                 className="container"
                 style={{
