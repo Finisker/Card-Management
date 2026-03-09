@@ -1,0 +1,40 @@
+name: Build and deploy to Pages
+
+on:
+  push:
+    branches:
+      - main   # runs on pushes to main branch
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: setup Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Step 3: install dependencies
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      # Step 4: build the Vite app
+      - name: Build Vite project
+        run: |
+          cd frontend
+          npm run build
+
+      # Step 5: commit built files in docs/
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          folder: frontend/dist
